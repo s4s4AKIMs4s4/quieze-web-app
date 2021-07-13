@@ -5,14 +5,22 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { useState } from "react";
+import {compose, createStore, applyMiddleware} from 'redux'
+import {Provider} from 'react-redux'
+import {rootReducer} from './redux/rootReducer'
+
+const store = createStore(rootReducer)
 
 
+const app = (
+<Provider store = {store}>
+  <App/>
+</Provider>
 
-
+)
 
 ReactDOM.render(
-
-    <App />,
+    app,
   document.getElementById('root')
 );
 
