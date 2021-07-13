@@ -1,9 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import menu from './menu'
-import test from './test'
-import button from './button'
+import Menu from './menu'
+import Main from './test'
+import Button from './button'
 import { useState } from "react";
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
@@ -23,7 +23,10 @@ function App() {
 
   
   return (
-    <h1>Main</h1>
+    <>
+    <Menu/>
+    <Button/>
+    </>
   );
 
 
