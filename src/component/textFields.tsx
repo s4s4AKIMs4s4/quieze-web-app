@@ -6,12 +6,20 @@ import { green } from '@material-ui/core/colors';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+
+      '& input:valid + fieldset': {
+        borderColor: theme.palette.primary.main,
+        borderWidth: 2,
+      },
+
       '& > *': {
+        border: '1px',
+        borderColor: theme.palette.primary.main,
         margin:theme.spacing(3),
         width: '25ch',
         marginTop:'200px',
         // backgroundColor: theme.palette.primary.dark,
-        borderBottomColor: 'green'
+        
       },
     
    
