@@ -28,7 +28,7 @@ let useStyles = makeStyles((theme: Theme) =>({
 
 function App() {
   const palletType = useSelector( (state:RootState) => state.palet.isDark)
-  const type = (!palletType) ? "dark" : "light"
+  const type = (!palletType) ? "light" : "dark"
   const mainPrimaryColor = palletType ? orange[500] : lightBlue[500];
   const mainSecondaryColor = palletType ? deepOrange[900] : deepPurple[500];
   
