@@ -6,13 +6,14 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
+     
       flexWrap: 'wrap',
       '& > *': {
         marginTop:'10vh',
-        marginLeft:'20vw',  
+        marginLeft:'15vw',  
         margin: theme.spacing(1),
-        width: theme.spacing(120),
-        height: theme.spacing(60),
+        width: theme.spacing(130),
+        height: theme.spacing(80),
       },
     },
   }),
