@@ -11,8 +11,8 @@ const useStyles = makeStyles((theme: Theme) =>
         marginTop:'10vh',
         marginLeft:'20vw',  
         margin: theme.spacing(1),
-        width: theme.spacing(100),
-        height: theme.spacing(50),
+        width: theme.spacing(120),
+        height: theme.spacing(60),
       },
     },
   }),
@@ -26,6 +26,7 @@ export default function SimplePaper( {children}) {
 
       <Paper elevation={5}>
           {children}
+          
     </Paper>
     </div>
   );
