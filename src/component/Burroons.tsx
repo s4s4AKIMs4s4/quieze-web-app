@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     test:{
         position:'fixed',
-        top:'85vh',
+        top:'80vh',
         left:'70vw',
   
       },
