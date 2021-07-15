@@ -17,10 +17,11 @@ const useStyles = makeStyles((theme: Theme) =>
      
       flexWrap: 'wrap',
       '& > *': {
-        marginTop:'10vh',
-        marginLeft:'15vw',  
+        marginTop:'12vh',
+        marginLeft:'8vw',
+        marginRight:'8vw',  
         margin: theme.spacing(1),
-        width: theme.spacing(130),
+        width: theme.spacing(180),
         height: theme.spacing(80),
       },
     },
@@ -32,7 +33,7 @@ export default function SimplePaper( {children}) {
   
   return (
     <>
-    <ButtonField/>
+    
     
     <div className={classes.root} >
  

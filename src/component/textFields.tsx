@@ -9,6 +9,7 @@ import { useState,useRef } from "react";
 import { convertCompilerOptionsFromJson } from 'typescript';
 import { cloneElement } from 'react';
 import { Grid } from '@material-ui/core';
+import Buttons from './Burroons'
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     textRoot:{
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
 
       '& > *': {
-        marginTop: '9em',
+        marginTop: '5em',
         width: '100%',
         marginLeft:'3px'
       },
@@ -108,7 +109,7 @@ export default function BasicTextFields(props) {
               
           </Grid>
         </div>
-       
+        <Buttons/>
       </form>
 
     </>
