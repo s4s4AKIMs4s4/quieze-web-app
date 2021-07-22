@@ -71,11 +71,9 @@ export default function BasicTextFields(props) {
   const classes = useStyles();
   const inputEl = React.useRef<HTMLDivElement | null>(null)
   const [it, setIt] = React.useState(props.text)
-  
   useEffect(() => {
     setIt(1)
     return () => {
-      
       setIt(1)
     }
   }, [])

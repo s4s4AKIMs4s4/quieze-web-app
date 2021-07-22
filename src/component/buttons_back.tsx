@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { useDispatch,useSelector } from 'react-redux';
 import { useCallback } from 'react';
-import {uploand, back} from '../redux/actions'
+import {uploand, back,update} from '../redux/actions'
 import { RootState } from '../redux/rootReducer';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import {inside} from '../redux/textReducer'
@@ -26,10 +26,10 @@ export default function Buttons(state_l) {
     // state_l = {'s':'s'}
     // const palletType = useSelector( (state:RootState) => state.palet.isDark)
     
-    const text  = useSelector( (state:RootState) => state.answer.text)
-    const index: number = useSelector( (state:RootState) => state.answer.index)
+    let text  = useSelector( (state:RootState) => state.answer.text)
+    let index: number = useSelector( (state:RootState) => state.answer.index)
     //let length: number = useSelector( (state:RootState) => state.answer.text)
-    const length = text.length  
+    let length = text.length  
     // console.log('index')
     // console.log(index)
     // // console.log(text[index].textState)
@@ -44,11 +44,16 @@ export default function Buttons(state_l) {
     //   console.log('а я я ')
     //   dispatch(uploand(state_l.textState))
     // }
-
-    const handler = useCallback(() => {
+    let Gener  = useSelector( (state:RootState) => state.answer)
+    const handlerNext = () => {
+      console.log("inside buttons")
       
-      dispatch(uploand(s2));
-    }, []);
+      console.log(Gener)
+      console.log(index)
+      console.log(s2)
+      console.log(`len - ${length}`)
+      dispatch(update(text,s2,index,length));
+    }
 
     const handlerBack = () =>{
       dispatch(back())
@@ -59,7 +64,7 @@ export default function Buttons(state_l) {
             <div>
             
                 <Button onClick = {handlerBack}> Back</Button>
-                <Button onClick = {handler}>Next</Button>
+                <Button onClick = {handlerNext}>Next</Button>
                 <Button>Save</Button>
             
             </div>

@@ -1,0 +1,66 @@
+//state textFields
+
+const [query, setQery] = useState({
+    "question": null,
+    "answers": [],
+    "true":null,
+})
+
+
+//example of data
+
+    state: [
+         {
+            "question":"oil",
+            "answers":["a", "b", "c", "d"],
+            "true": 1,
+        }, 
+
+        {
+            "question":"oil",
+            "answers":["a", "b", "c", "d"],
+            "true": 1,
+        }
+    ]
+
+
+
+//reducer initial state
+
+intialSate = {
+    state = [{}],
+    index: null,
+}
+
+
+ // loop()?.map ((val, idx) =>{
+                
+            //     if(idx === it-1){
+            //       return (
+                          
+            //               <Grid item xs={6} sm={3}>
+            //                 <TextField id="outlined-basic2" label="Enter a answer" className = "text" onChange={textHandler(idx)} onClick = {()=>{(it<=7)?setIt(it+1):setIt(8)}}/>
+            //               </Grid>
+            //                )
+            //     }
+            //     return(
+            //             <Grid item xs={6} sm={3} >
+            //             <TextField id="outlined-basic2" label="Enter a answer" onChange={textHandler(idx)} className = "text"  />
+            //           </Grid>
+            //           )
+            //   }   
+
+            // )
+
+
+
+              // const content = () => {
+  //   let arr = loop()
+  //   console.log(arr)
+  //   return(arr.map((val, idx) =>
+  //   <Grid item xs={6} sm={3} key = {idx}>        
+  //     {textFieldJsx(idx)}   
+  //   </Grid>
+  //   )
+  //   )
+  // }

@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
 
 import { Grid } from '@material-ui/core';
-import Buttons from './Burroons'
+import Buttons from './buttons_back'
 import { queryByTestId } from '@testing-library/react';
 import { useEffect } from 'react';
 
@@ -67,32 +67,33 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function BasicTextFields(props) {
+export  function Basic(props) {
   const classes = useStyles();
   const inputEl = React.useRef<HTMLDivElement | null>(null)
-  const [it, setIt] = React.useState(props.text)
-  
+  const [it, setIt] = React.useState(props.text.length)
+  const [query, SetQuery] = React.useState(
+    props.obj
+  ) 
   useEffect(() => {
-    setIt(1)
+    console.log('props.obj')
+    console.log(props.obj)
+    setIt(props.text.length)
+    SetQuery(props.obj)    
     return () => {
-      
+    
       setIt(1)
     }
-  }, [])
+  }, [props.obj])
 
 
   let init: string[] = []
-  const [query, SetQuery] = React.useState(
-    {
-      "question": null,
-      "answers":init,
-      "true":"s",
-    }
-  ) 
+  // const [query, SetQuery] = React.useState(
+  //   props.obj
+  // ) 
   function loop(){
-    let mas:number [] = new Array(it)
-    for(let i = 0;i<it;i++){
-      mas[i] = i
+    let mas:string [] =  [...props.text]
+    for(let i = props.text.length;i<=it;i++){
+      mas[i] = ''
     }
     return mas
   }
@@ -104,23 +105,28 @@ export default function BasicTextFields(props) {
       // console.log(`mas - ${query.answers[0]}`)
       const mas  = query?.answers
       mas[idx] = event.target.value
+      console.log('value')
+      console.log(mas[idx])
       SetQuery(prev =>( {...prev, ["answers"]: mas } ) )
       // console.log(query)
     }
   )
 
-  let textFieldJsx = (idx) => {
-    if(idx === it-1){
-      return (<TextField id="outlined-basic2" label="Enter a answer" className = "text" onChange={textHandler(idx)} onClick = {()=>{(it<=7)?setIt(it+1):setIt(8)}}/>)    
+  let textFieldJsx = (val,idx) => {
+    if(idx === it){
+      return (<TextField id="outlined-basic2" className = "text" onChange={textHandler(idx)} onClick = {()=>{(it<=7)?setIt(it+1):setIt(8)}}/>)    
+    }
+    else if(idx >= props.text.length) {
+      return (<TextField id="outlined-basic2"  value = {val} onChange={textHandler(idx)} className = "text"  /> ) 
     }
     else{
-      return (<TextField id="outlined-basic2" label="Enter a answer" onChange={textHandler(idx)} className = "text"  /> ) 
+      return (<TextField id="outlined-basic2"  value = {val} onChange={textHandler(idx)} className = "text"  /> ) 
     }
   }
 
  const content = loop()?.map((val, idx) =>
   (<Grid item xs={6} sm={3} key = {idx}>        
-    {textFieldJsx(idx)}   
+    {textFieldJsx(val,idx)}   
   </Grid>)
  )
 

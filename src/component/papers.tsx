@@ -17,11 +17,12 @@ const useStyles = makeStyles((theme: Theme) =>
      
       flexWrap: 'wrap',
       '& > *': {
+        
         marginTop:'12vh',
-        marginLeft:'8vw',
-        marginRight:'8vw',  
+        marginLeft:'9vw',
+        marginRight:'9vw',  
         margin: theme.spacing(1),
-        width: theme.spacing(180),
+        width:'100%',
         height: theme.spacing(80),
       },
     },

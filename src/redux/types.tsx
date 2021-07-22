@@ -1,2 +1,6 @@
 export const DARK_STATE = 'DARK_STATE'
 export const LIGTH_STATE = 'LIGTH_STATE'
+export const UPLOAD = 'UPLOAD'
+export const BACK = 'BACK' 
+export const UPDATE = 'UPDATE'
+export const NEXT = 'NEXT'
