@@ -5,8 +5,11 @@ import { useCallback } from 'react';
 import {uploand, back} from '../redux/actions'
 import { RootState } from '../redux/rootReducer';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import {inside} from '../redux/textReducer'
-import { ContactSupportOutlined } from '@material-ui/icons';
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import Game from './game'
+import {withRouter} from 'react-router-dom';
+
+import { useHistory } from 'react-router-dom';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     test:{
@@ -23,36 +26,25 @@ export default function Buttons(state_l) {
     const classes = useStyles();
    
     const s2 = Object.assign({},state_l.textState)
-    // state_l = {'s':'s'}
-    // const palletType = useSelector( (state:RootState) => state.palet.isDark)
-    
     const text  = useSelector( (state:RootState) => state.answer.text)
     const index: number = useSelector( (state:RootState) => state.answer.index)
-    //let length: number = useSelector( (state:RootState) => state.answer.text)
     const length = text.length  
-    // console.log('index')
-    // console.log(index)
-    // // console.log(text[index].textState)
-    // console.log('массив')
-    
-    // console.log(text[index])
-    
-    // console.log('объект из редюсера')
-    // console.log(text  )
     const dispatch = useDispatch()
-    // const nextHandler = () =>{
-    //   console.log('а я я ')
-    //   dispatch(uploand(state_l.textState))
-    // }
 
-    const handler = useCallback(() => {
-      
+    const history = useHistory();
+
+    const handler = () => {
       dispatch(uploand(s2));
-    }, []);
+      state_l.functions()
+    }
 
     const handlerBack = () =>{
-      dispatch(back())
+      if(index !== 0){
+        dispatch(back())
+      }
+      
     }
+    const handleClick = () => history.push('/game');
 
     return(
         <form className={classes.test} noValidate autoComplete="off">
@@ -60,7 +52,11 @@ export default function Buttons(state_l) {
             
                 <Button onClick = {handlerBack}> Back</Button>
                 <Button onClick = {handler}>Next</Button>
-                <Button>Save</Button>
+                
+                <Button onClick={handleClick}>  
+                  Save
+                </Button>
+                
             
             </div>
         </form>

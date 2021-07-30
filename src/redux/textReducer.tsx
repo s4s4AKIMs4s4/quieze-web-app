@@ -6,7 +6,7 @@ export type inside =
 {
     question: null,
     answers: string[],
-    true: string,
+    true: number[],
 } 
 
 
@@ -26,7 +26,7 @@ let initialState: {text:Array<inside>,index: number,buttonString: string} = {
                                             {
                                                 question: null,
                                                 answers: init,
-                                                true:"null",                      
+                                                true: [0],                      
                                             }],
                                             index:0,
                                             buttonString: "INIT",

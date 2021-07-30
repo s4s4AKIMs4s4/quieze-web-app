@@ -1,14 +1,12 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme, alpha } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-
 import Divider from '@material-ui/core/Divider';
-
 import { Grid } from '@material-ui/core';
 import Buttons from './buttons_back'
-import { queryByTestId } from '@testing-library/react';
 import { useEffect } from 'react';
-
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
 
@@ -71,14 +69,24 @@ export  function Basic(props) {
   const classes = useStyles();
   const inputEl = React.useRef<HTMLDivElement | null>(null)
   const [it, setIt] = React.useState(props.text.length)
+  const [checherIdx,setcherIdx] = React.useState(props.correct)
+
+
+
+
+
+
   const [query, SetQuery] = React.useState(
     props.obj
   ) 
   useEffect(() => {
     console.log('props.obj')
-    console.log(props.obj)
     setIt(props.text.length)
-    SetQuery(props.obj)    
+    SetQuery(props.obj)
+    console.log(props.obj.true)
+    console.log(Array.isArray(props.obj.true))
+  
+    
     return () => {
     
       setIt(1)
@@ -87,9 +95,6 @@ export  function Basic(props) {
 
 
   let init: string[] = []
-  // const [query, SetQuery] = React.useState(
-  //   props.obj
-  // ) 
   function loop(){
     let mas:string [] =  [...props.text]
     for(let i = props.text.length;i<=it;i++){
@@ -99,28 +104,95 @@ export  function Basic(props) {
   }
 
   let textHandler = (idx) =>( (event) => {
-      //запомниает???
-      // let mas = query?.answers 
-      // mas[idx] = event.target.value
-      // console.log(`mas - ${query.answers[0]}`)
       const mas  = query?.answers
       mas[idx] = event.target.value
       console.log('value')
       console.log(mas[idx])
       SetQuery(prev =>( {...prev, ["answers"]: mas } ) )
-      // console.log(query)
+
+      // const values = Object.values(checherIdx)
+
+      // let correct: number[] = [] 
+      // for(let it  = 0 ; it<values.length; it++){
+      //   if(checherIdx[it])
+      //     correct.push(it)  
+      // }
+
+
+      // SetQuery(prev =>( {...prev, true: correct } ) )
+      
     }
   )
 
+  const giveCorrect = (check, length)=>{
+    let correct: number[] = [] 
+    for(let it  = 0 ; it<length; it++){
+      if(check[it])
+      correct.push(it)  
+    }
+    return correct
+  }
+
+
+
+  const checkerHandler = (idx) => ((event) => {
+    let check = {...checherIdx}
+
+    if(checherIdx[idx] ){
+      check[idx] = false      
+      setcherIdx( (prev) =>({...prev,[idx]: false}))
+    }
+    else {
+      check[idx] = true 
+      setcherIdx( (prev) =>({...prev,[idx]: true}))
+    }
+    const length = Object.values(check).length
+    const correct = giveCorrect(check,length)
+    SetQuery(prev =>( {...prev, true: correct } ) )
+    
+  })
+
+
+  const hadleLastClick = (idx) => (event) =>{
+    setcherIdx({...checherIdx,[idx+1]: false})
+    setIt(it+1)
+  }
+
+
+
   let textFieldJsx = (val,idx) => {
     if(idx === it){
-      return (<TextField id="outlined-basic2" className = "text" onChange={textHandler(idx)} onClick = {()=>{(it<=7)?setIt(it+1):setIt(8)}}/>)    
+      return (
+      <>
+        <FormControlLabel
+          control={<Checkbox  checked={checherIdx[idx]} onChange = {checkerHandler(idx)} name="gilad" />}
+          label="Correct answer"
+        />
+        <TextField id="outlined-basic2" className = "text" onChange={textHandler(idx)} onClick = {hadleLastClick(idx)}/>
+      </>
+      )    
     }
     else if(idx >= props.text.length) {
-      return (<TextField id="outlined-basic2"  value = {val} onChange={textHandler(idx)} className = "text"  /> ) 
+      return (
+      <>
+      <FormControlLabel
+          control={<Checkbox  checked={checherIdx[idx]} onChange = {checkerHandler(idx)} name="gilad" />}
+          label="Correct answer"
+        />
+      <TextField id="outlined-basic2"  value = {val} onChange={textHandler(idx)} className = "text"  /> 
+      </>
+      ) 
     }
     else{
-      return (<TextField id="outlined-basic2"  value = {val} onChange={textHandler(idx)} className = "text"  /> ) 
+      return (
+        <>
+          <FormControlLabel
+          control={<Checkbox  checked={checherIdx[idx]} onChange = {checkerHandler(idx)} name="gilad" />}
+          label="Correct answer"
+          />
+          <TextField id="outlined-basic2"  value = {val} onChange={textHandler(idx)} className = "text"  />
+       </>
+       ) 
     }
   }
 
@@ -129,12 +201,14 @@ export  function Basic(props) {
     {textFieldJsx(val,idx)}   
   </Grid>)
  )
-
+ const handlerMainField  = (event) => {
+  SetQuery(prev =>( {...prev, question:event.target.value } ) )
+ }
   return (
     <>
       <form className={classes.root} noValidate autoComplete="off">
      
-      <TextField id="outlined-basic2" label="Enter a answer"/>
+      <TextField id="outlined-basic2" label="Enter a answer" value ={query.question} onChange ={handlerMainField} />
         
         
       </form>

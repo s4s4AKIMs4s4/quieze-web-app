@@ -9,10 +9,10 @@ import { deepPurple } from '@material-ui/core/colors';
 import {useDispatch, useSelector} from 'react-redux'
 import Quize from './component/Quize'
 import { createTheme, ThemeProvider,makeStyles,Theme } from "@material-ui/core/styles";
-import Switch from '@material-ui/core/Switch';
 import {RootState} from './redux/rootReducer'
 import CssBaseline from '@material-ui/core/CssBaseline';
-
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Game from './component/game'
 
 let useStyles = makeStyles((theme: Theme) =>({
   content: {
@@ -49,12 +49,21 @@ function App() {
   
   const classes = useStyles();
   console.log(classes)
-  return (<ThemeProvider theme={darkTheme}>
-     <CssBaseline />
-    
-    <Quize/>
-   
-    </ThemeProvider>
+  return (
+  
+  <Router>
+    <Switch>
+      <Route path="/" exact>
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline />
+          <Quize/>
+        </ThemeProvider>
+      </Route>
+      <Route path="/game" exact>
+        <Game/>
+      </Route>
+    </Switch>
+  </Router>
   );
 
 

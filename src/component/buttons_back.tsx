@@ -1,12 +1,10 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { useDispatch,useSelector } from 'react-redux';
-import { useCallback } from 'react';
 import {uploand, back,update} from '../redux/actions'
 import { RootState } from '../redux/rootReducer';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import {inside} from '../redux/textReducer'
-import { ContactSupportOutlined } from '@material-ui/icons';
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     test:{
@@ -21,29 +19,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Buttons(state_l) {
     const classes = useStyles();
-   
     const s2 = Object.assign({},state_l.textState)
-    // state_l = {'s':'s'}
-    // const palletType = useSelector( (state:RootState) => state.palet.isDark)
-    
     let text  = useSelector( (state:RootState) => state.answer.text)
     let index: number = useSelector( (state:RootState) => state.answer.index)
-    //let length: number = useSelector( (state:RootState) => state.answer.text)
     let length = text.length  
-    // console.log('index')
-    // console.log(index)
-    // // console.log(text[index].textState)
-    // console.log('массив')
-    
-    // console.log(text[index])
-    
-    // console.log('объект из редюсера')
-    // console.log(text  )
+
     const dispatch = useDispatch()
-    // const nextHandler = () =>{
-    //   console.log('а я я ')
-    //   dispatch(uploand(state_l.textState))
-    // }
     let Gener  = useSelector( (state:RootState) => state.answer)
     const handlerNext = () => {
       console.log("inside buttons")
@@ -56,7 +37,8 @@ export default function Buttons(state_l) {
     }
 
     const handlerBack = () =>{
-      dispatch(back())
+      if(index !== 0)
+        dispatch(back())
     }
 
     return(

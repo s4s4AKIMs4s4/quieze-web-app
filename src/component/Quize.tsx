@@ -1,10 +1,7 @@
 import React from 'react';
 import Menu from './menu'
-import Main from '../test'
 import Forms from './textFields'
 import Forms2 from './textFields2'
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
 import Papers from './papers'
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/rootReducer';
@@ -19,8 +16,27 @@ export default function Quize(){
     let buttonString: string = useSelector( (state:RootState) => state.answer.buttonString)
     text = JSON.parse(JSON.stringify(text))
     console.log(gener)
-    let Text = <TextField id="outlined-basic1" label="Enter question" />
 
+    let cherIdx = {}
+    // const [checherIdx,setcherIdx] = React.useState({
+    //     0:false
+    //   })
+
+    const mappingChecherIdx = (correct) => {
+        
+        console.log(Array.isArray(correct))
+        
+        for( let i = 0 ;i < text.length;i++){
+            cherIdx[i] = false
+        }
+    
+        correct.forEach((val) =>{ 
+            let v = val
+            cherIdx[val] = true
+        }
+        )
+        
+    }
     function checher () {
         console.log('answers')
         console.log(text)
@@ -30,21 +46,19 @@ export default function Quize(){
             console.log('index')
             console.log(index)
             console.log('---------------------------------------------')
-            return (<Basic text = {text[index+1].answers} obj = {text[index+1]} />)
+            mappingChecherIdx(text[index+1].true)
+            return (<Basic text = {text[index+1].answers} obj = {text[index+1]} correct = {cherIdx}/>)
         }
         else if(buttonString === "UPDATE"){
             console.log('index')
             console.log(index)
             
             console.log('---------------------------------------------')
-            return (<Basic text = {text[index+1].answers} obj = {text[index+1]} />)
+            mappingChecherIdx(text[index+1].true)
+            return (<Basic text = {text[index+1].answers} obj = {text[index+1] }  correct = {cherIdx}/>)
         }
-        // else if (buttonString === "NEXT") return 
-        // else if ( buttonString === "UPDATE"){
-
-        // }
-        else if(index % 2 == 0) return(<Forms text = {4}/>)        
-        else return (<Forms2 text = {1}/>)
+        else return(<Forms text = {1}/>)        
+       
     }
        
     return (

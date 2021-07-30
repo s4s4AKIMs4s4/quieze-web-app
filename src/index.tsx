@@ -8,6 +8,9 @@ import { useState } from "react";
 import {compose, createStore, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
 import {rootReducer} from './redux/rootReducer'
+import Game from './component/game'
+
+
 
 declare global {
   interface Window {
