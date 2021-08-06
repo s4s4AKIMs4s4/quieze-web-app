@@ -5,8 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
 
 import { Grid } from '@material-ui/core';
-import Buttons from './Burroons'
-import { queryByTestId } from '@testing-library/react';
+import Buttons from './nextButtons'
 import { useEffect } from 'react';
 
 

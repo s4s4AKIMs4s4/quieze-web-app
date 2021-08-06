@@ -1,12 +1,11 @@
 import React from 'react';
 
 import './App.css';
-import { useState } from "react";
 import { orange } from '@material-ui/core/colors';
 import { lightBlue } from '@material-ui/core/colors';
 import { deepOrange } from '@material-ui/core/colors';
 import { deepPurple } from '@material-ui/core/colors';
-import {useDispatch, useSelector} from 'react-redux'
+import {useSelector} from 'react-redux'
 import Quize from './component/Quize'
 import { createTheme, ThemeProvider,makeStyles,Theme } from "@material-ui/core/styles";
 import {RootState} from './redux/rootReducer'

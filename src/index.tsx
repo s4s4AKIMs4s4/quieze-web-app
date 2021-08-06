@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createTheme, ThemeProvider } from "@material-ui/core/styles";
-import { useState } from "react";
-import {compose, createStore, applyMiddleware} from 'redux'
+import {compose, createStore} from 'redux'
 import {Provider} from 'react-redux'
 import {rootReducer} from './redux/rootReducer'
-import Game from './component/game'
+
 
 
 

@@ -4,22 +4,11 @@ import { useDispatch,useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import {uploand, back} from '../redux/actions'
 import { RootState } from '../redux/rootReducer';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
-import Game from './game'
-import {withRouter} from 'react-router-dom';
-
 import { useHistory } from 'react-router-dom';
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    test:{
-        position:'relative',
-        top:'1vh',
-        left:'32vw',
-        
-      },
-    })
-)
+import useStyles from './cssModules/nextButtons';
+
+
+
 
 
 export default function Buttons(state_l) {

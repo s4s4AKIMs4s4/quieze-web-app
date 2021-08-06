@@ -1,69 +1,17 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme, alpha } from '@material-ui/core/styles';
+
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
 import { Grid } from '@material-ui/core';
-import Buttons from './buttons_back'
+import Buttons from './backButtons'
 import { useEffect } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import useStyles from './cssModules/backTextFields';
 
 
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    textRoot:{
-      flexGrow: 1,
-      position:'relative',
-      justifyContent:'flex-end',
-    },
-    root: {
 
-      '& input:valid + fieldset': {
-        borderColor: theme.palette.primary.main,
-        borderWidth: 1,
-
-      },
-
-      '& > *': {
-
-        margin: theme.spacing(3),
-        width: '80%',
-        marginTop: '40px',
-        marginLeft: '10%',
-        marginRight: '10%'
-        // backgroundColor: theme.palette.primary.dark,
-
-
-      },
-    },
-    cen: {
-
-      '& input:valid + fieldset': {
-        borderColor: theme.palette.primary.main,
-        borderWidth: 1,
-
-      },
-
-      '& > *': {
-        marginTop: '5em',
-        width: '100%',
-        marginLeft:'3px'
-      },
-    },
-    question:{
-      marginTop:'5vh',
-    },
-    but: {
-      '& > *': {
-        position:'fixed',
-        marginTop: '45vh',
-        
-      }
-      
-    },
-  }),
-);
 
 export  function Basic(props) {
   const classes = useStyles();
@@ -109,18 +57,6 @@ export  function Basic(props) {
       console.log('value')
       console.log(mas[idx])
       SetQuery(prev =>( {...prev, ["answers"]: mas } ) )
-
-      // const values = Object.values(checherIdx)
-
-      // let correct: number[] = [] 
-      // for(let it  = 0 ; it<values.length; it++){
-      //   if(checherIdx[it])
-      //     correct.push(it)  
-      // }
-
-
-      // SetQuery(prev =>( {...prev, true: correct } ) )
-      
     }
   )
 

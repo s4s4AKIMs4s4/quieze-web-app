@@ -1,12 +1,16 @@
 import React from 'react';
 import Menu from './menu'
-import Forms from './textFields'
-import Forms2 from './textFields2'
+import Forms from './nextTextFields'
 import Papers from './papers'
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/rootReducer';
 import { useState } from 'react';
-import {Basic} from './Back'
+import {Basic} from './backTextFields'
+
+
+
+
+
 
 export default function Quize(){
     const [f,setF] = useState(true)
@@ -18,45 +22,27 @@ export default function Quize(){
     console.log(gener)
 
     let cherIdx = {}
-    // const [checherIdx,setcherIdx] = React.useState({
-    //     0:false
-    //   })
+
+
 
     const mappingChecherIdx = (correct) => {
-        
-        console.log(Array.isArray(correct))
-        
         for( let i = 0 ;i < text.length;i++){
             cherIdx[i] = false
         }
-    
         correct.forEach((val) =>{ 
             let v = val
             cherIdx[val] = true
-        }
-        )
-        
+        })  
     }
+
+
     function checher () {
-        console.log('answers')
-        console.log(text)
-        console.log("buttonString")
-        console.log(buttonString)
-        if (buttonString === "BACK"){ 
-            console.log('index')
-            console.log(index)
-            console.log('---------------------------------------------')
+
+        if (buttonString === "BACK" || buttonString === "UPDATE" ){ 
             mappingChecherIdx(text[index+1].true)
             return (<Basic text = {text[index+1].answers} obj = {text[index+1]} correct = {cherIdx}/>)
         }
-        else if(buttonString === "UPDATE"){
-            console.log('index')
-            console.log(index)
-            
-            console.log('---------------------------------------------')
-            mappingChecherIdx(text[index+1].true)
-            return (<Basic text = {text[index+1].answers} obj = {text[index+1] }  correct = {cherIdx}/>)
-        }
+
         else return(<Forms text = {1}/>)        
        
     }

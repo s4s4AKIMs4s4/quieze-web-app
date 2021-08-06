@@ -3,18 +3,9 @@ import Button from '@material-ui/core/Button';
 import { useDispatch,useSelector } from 'react-redux';
 import {uploand, back,update} from '../redux/actions'
 import { RootState } from '../redux/rootReducer';
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import useStyles from './cssModules/backButtons';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    test:{
-        position:'relative',
-        top:'1vh',
-        left:'32vw',
-        
-      },
-    })
-)
+
 
 
 export default function Buttons(state_l) {
