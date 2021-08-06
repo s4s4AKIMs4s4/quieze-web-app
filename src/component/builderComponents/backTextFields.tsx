@@ -7,13 +7,13 @@ import Buttons from './backButtons'
 import { useEffect } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import useStyles from './cssModules/backTextFields';
+import useStyles from '../cssModules/backTextFields';
 
 
 
 
 
-export  function Basic(props) {
+export  function BackTextFields(props) {
   const classes = useStyles();
   const inputEl = React.useRef<HTMLDivElement | null>(null)
   const [it, setIt] = React.useState(props.text.length)

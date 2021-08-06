@@ -1,6 +1,6 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
-import useStyles from './cssModules/paper';
+import useStyles from '../cssModules/paper';
 
 
 // const useStyles = makeStyles((theme: Theme) =>

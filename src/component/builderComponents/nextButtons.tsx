@@ -2,10 +2,10 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { useDispatch,useSelector } from 'react-redux';
 import { useCallback } from 'react';
-import {uploand, back} from '../redux/actions'
-import { RootState } from '../redux/rootReducer';
+import {uploand, back} from '../../redux/actions'
+import { RootState } from '../../redux/rootReducer';
 import { useHistory } from 'react-router-dom';
-import useStyles from './cssModules/nextButtons';
+import useStyles from '../cssModules/nextButtons';
 
 
 

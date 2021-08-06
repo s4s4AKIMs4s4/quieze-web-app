@@ -1,11 +1,11 @@
 import React from 'react';
-import Menu from './menu'
-import Forms from './nextTextFields'
-import Papers from './papers'
+import Menu from '../commonComponents/menu'
+import NextTextFields from './nextTextFields'
+import Papers from './paper'
 import { useSelector } from 'react-redux';
-import { RootState } from '../redux/rootReducer';
+import { RootState } from '../../redux/rootReducer';
 import { useState } from 'react';
-import {Basic} from './backTextFields'
+import {BackTextFields} from './backTextFields'
 
 
 
@@ -40,10 +40,10 @@ export default function Quize(){
 
         if (buttonString === "BACK" || buttonString === "UPDATE" ){ 
             mappingChecherIdx(text[index+1].true)
-            return (<Basic text = {text[index+1].answers} obj = {text[index+1]} correct = {cherIdx}/>)
+            return (<BackTextFields text = {text[index+1].answers} obj = {text[index+1]} correct = {cherIdx}/>)
         }
 
-        else return(<Forms text = {1}/>)        
+        else return(<NextTextFields text = {1}/>)        
        
     }
        

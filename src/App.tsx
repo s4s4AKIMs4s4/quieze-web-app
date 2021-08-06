@@ -6,22 +6,16 @@ import { lightBlue } from '@material-ui/core/colors';
 import { deepOrange } from '@material-ui/core/colors';
 import { deepPurple } from '@material-ui/core/colors';
 import {useSelector} from 'react-redux'
-import Quize from './component/Quize'
+import Quize from './component/builderComponents/builderQuize'
 import { createTheme, ThemeProvider,makeStyles,Theme } from "@material-ui/core/styles";
 import {RootState} from './redux/rootReducer'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Game from './component/game'
+import Game from './component/gameComponents/game'
+import useStyles from './component/cssModules/app';
 
-let useStyles = makeStyles((theme: Theme) =>({
-  content: {
-    flexGrow: 1,
-    height: "100vh",
-    overflow: "auto",
-    backgroundColor:theme.palette.primary.main,
-  },
-  
-}));
+
+
 
 
 
@@ -32,7 +26,7 @@ function App() {
   const mainSecondaryColor = palletType ? deepOrange[900] : deepPurple[500];
   
 
-  //наша тема необходимо поигарться с цветами
+
   const darkTheme = createTheme({
     palette: {
       type: type,

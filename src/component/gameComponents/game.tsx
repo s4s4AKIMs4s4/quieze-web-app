@@ -1,7 +1,7 @@
 
-import Menu from './menu'
+import Menu from '../commonComponents/menu'
 import { useSelector } from 'react-redux';
-import { RootState } from '../redux/rootReducer';
+import { RootState } from '../../redux/rootReducer';
 import { useState, useEffect } from 'react';
 
 import Button from '@material-ui/core/Button';

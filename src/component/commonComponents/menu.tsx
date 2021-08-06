@@ -16,8 +16,8 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Switch from '@material-ui/core/Switch';
 import {useDispatch, useSelector} from 'react-redux'
-import {RootState} from '../redux/rootReducer'
-import{showDark,showLite} from '../redux/actions'
+import {RootState} from '../../redux/rootReducer'
+import{showDark,showLite} from '../../redux/actions'
 import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -30,7 +30,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 
-import useStyles from './cssModules/menu';
+import useStyles from '../cssModules/menu';
 
 const drawerWidth = 240;
 

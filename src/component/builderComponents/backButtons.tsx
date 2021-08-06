@@ -1,9 +1,9 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { useDispatch,useSelector } from 'react-redux';
-import {uploand, back,update} from '../redux/actions'
-import { RootState } from '../redux/rootReducer';
-import useStyles from './cssModules/backButtons';
+import {uploand, back,update} from '../../redux/actions'
+import { RootState } from '../../redux/rootReducer';
+import useStyles from '../cssModules/backButtons';
 
 
 

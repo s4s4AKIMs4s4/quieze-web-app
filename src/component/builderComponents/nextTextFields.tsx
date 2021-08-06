@@ -6,7 +6,7 @@ import Buttons from './nextButtons'
 import { useEffect } from 'react';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import useStyles from './cssModules/nextTextFields';
+import useStyles from '../cssModules/nextTextFields';
 
 
 
@@ -14,7 +14,7 @@ import useStyles from './cssModules/nextTextFields';
 
 
 
-export default function BasicTextFields(props) {
+export default function NextTextFields(props) {
   const classes = useStyles();
   const inputEl = React.useRef<HTMLDivElement | null>(null)
   const first = React.useRef<HTMLInputElement | null>(null)
