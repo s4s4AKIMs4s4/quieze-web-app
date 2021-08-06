@@ -4,7 +4,6 @@ import NextTextFields from './nextTextFields'
 import Papers from './paper'
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/rootReducer';
-import { useState } from 'react';
 import {BackTextFields} from './backTextFields'
 
 
@@ -13,37 +12,36 @@ import {BackTextFields} from './backTextFields'
 
 
 export default function Quize(){
-    const [f,setF] = useState(true)
-    let text  = useSelector( (state:RootState) => state.answer.text)
-    let gener  = useSelector( (state:RootState) => state.answer)
-    let index: number = useSelector( (state:RootState) => state.answer.index)
-    let buttonString: string = useSelector( (state:RootState) => state.answer.buttonString)
-    text = JSON.parse(JSON.stringify(text))
-    console.log(gener)
-
-    let cherIdx = {}
+    let allQuestions  = useSelector( (state:RootState) => state.answer.text)
+    let currentQuestion: number = useSelector( (state:RootState) => state.answer.index) + 1
+    let pressedButton: string = useSelector( (state:RootState) => state.answer.buttonString)
+    let it = 0
+    allQuestions = JSON.parse(JSON.stringify(allQuestions))
+    
 
 
 
-    const mappingChecherIdx = (correct) => {
-        for( let i = 0 ;i < text.length;i++){
-            cherIdx[i] = false
-        }
-        correct.forEach((val) =>{ 
-            let v = val
-            cherIdx[val] = true
+    const getCorrectAnswers = (indexOfCorrectAnswers, allQuestions) => {
+        let correctAnswers = {}
+
+        allQuestions.forEach((val,index) => correctAnswers[index] = false  )
+
+        indexOfCorrectAnswers.forEach((val) =>{ 
+            correctAnswers[val] = true
         })  
+        return correctAnswers
+
     }
 
 
-    function checher () {
-
-        if (buttonString === "BACK" || buttonString === "UPDATE" ){ 
-            mappingChecherIdx(text[index+1].true)
-            return (<BackTextFields text = {text[index+1].answers} obj = {text[index+1]} correct = {cherIdx}/>)
+    function pickPageForRendor() {
+        it++;
+        if (pressedButton === "BACK" || pressedButton === "UPDATE" ){ 
+            const correctAnswers = getCorrectAnswers(allQuestions[currentQuestion].true, allQuestions  )
+            return (<BackTextFields text = {allQuestions[currentQuestion].answers} obj = {allQuestions[currentQuestion]} correct = {correctAnswers}/>)
         }
 
-        else return(<NextTextFields text = {1}/>)        
+        return(<NextTextFields text = {1}/>)        
        
     }
        
@@ -51,7 +49,7 @@ export default function Quize(){
         <div>
         <Menu/>
         <Papers>
-            {checher()}
+            {pickPageForRendor()}
         </Papers>
         </div>
         )
