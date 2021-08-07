@@ -15,25 +15,16 @@ import useStyles from '../cssModules/backTextFields';
 
 export  function BackTextFields(props) {
   const classes = useStyles();
-  const inputEl = React.useRef<HTMLDivElement | null>(null)
   const [it, setIt] = React.useState(props.text.length)
-  const [checherIdx,setcherIdx] = React.useState(props.correct)
-
-
-
-
-
-
-  const [query, SetQuery] = React.useState(
+  const [correctAnswers,setСorrectAnswers] = React.useState(props.correct)
+  const [currentQuestion, SetCurrentQuestion] = React.useState(
     props.obj
   ) 
+
   useEffect(() => {
-    console.log('props.obj')
     setIt(props.text.length)
-    SetQuery(props.obj)
-    console.log(props.obj.true)
-    console.log(Array.isArray(props.obj.true))
-  
+    setСorrectAnswers(props.correct)
+    SetCurrentQuestion(props.obj)
     
     return () => {
     
@@ -41,9 +32,7 @@ export  function BackTextFields(props) {
     }
   }, [props.obj])
 
-
-  let init: string[] = []
-  function loop(){
+  function getListOfTextFields(){
     let mas:string [] =  [...props.text]
     for(let i = props.text.length;i<=it;i++){
       mas[i] = ''
@@ -52,13 +41,14 @@ export  function BackTextFields(props) {
   }
 
   let textHandler = (idx) =>( (event) => {
-      const mas  = query?.answers
+      const mas  = currentQuestion?.answers
       mas[idx] = event.target.value
       console.log('value')
       console.log(mas[idx])
-      SetQuery(prev =>( {...prev, ["answers"]: mas } ) )
+      SetCurrentQuestion(prev =>( {...prev, ["answers"]: mas } ) )
     }
   )
+
 
   const giveCorrect = (check, length)=>{
     let correct: number[] = [] 
@@ -71,93 +61,95 @@ export  function BackTextFields(props) {
 
 
 
-  const checkerHandler = (idx) => ((event) => {
-    let check = {...checherIdx}
+  const checkHandler = (idx) => ((event) => {
+    let check = {...correctAnswers}
 
-    if(checherIdx[idx] ){
+    if(correctAnswers[idx] ){
       check[idx] = false      
-      setcherIdx( (prev) =>({...prev,[idx]: false}))
+      setСorrectAnswers( (prev) =>({...prev,[idx]: false}))
     }
     else {
       check[idx] = true 
-      setcherIdx( (prev) =>({...prev,[idx]: true}))
+      setСorrectAnswers( (prev) =>({...prev,[idx]: true}))
     }
     const length = Object.values(check).length
     const correct = giveCorrect(check,length)
-    SetQuery(prev =>( {...prev, true: correct } ) )
+    SetCurrentQuestion(prev =>( {...prev, true: correct } ) )
     
   })
 
 
-  const hadleLastClick = (idx) => (event) =>{
-    setcherIdx({...checherIdx,[idx+1]: false})
+  const hadleLastField = (idx) => (event) =>{
+    setСorrectAnswers({...correctAnswers,[idx+1]: false})
     setIt(it+1)
   }
 
 
 
+
+
+
+
+
   let textFieldJsx = (val,idx) => {
-    if(idx === it){
+   
       return (
       <>
         <FormControlLabel
-          control={<Checkbox  checked={checherIdx[idx]} onChange = {checkerHandler(idx)} name="gilad" />}
+          control={<Checkbox  checked={correctAnswers[idx]} onChange = {checkHandler(idx)} name="gilad" />}
           label="Correct answer"
         />
-        <TextField id="outlined-basic2" className = "text" onChange={textHandler(idx)} onClick = {hadleLastClick(idx)}/>
+
+        {(idx === it)
+          ?<TextField id="outlined-basic2" className = "text" onChange={textHandler(idx)} onClick = {hadleLastField(idx)}/> 
+          :<TextField id="outlined-basic2"  value = {val} onChange={textHandler(idx)} className = "text"  />
+          }
       </>
       )    
-    }
-    else if(idx >= props.text.length) {
-      return (
-      <>
-      <FormControlLabel
-          control={<Checkbox  checked={checherIdx[idx]} onChange = {checkerHandler(idx)} name="gilad" />}
-          label="Correct answer"
-        />
-      <TextField id="outlined-basic2"  value = {val} onChange={textHandler(idx)} className = "text"  /> 
-      </>
-      ) 
-    }
-    else{
-      return (
-        <>
-          <FormControlLabel
-          control={<Checkbox  checked={checherIdx[idx]} onChange = {checkerHandler(idx)} name="gilad" />}
-          label="Correct answer"
-          />
-          <TextField id="outlined-basic2"  value = {val} onChange={textHandler(idx)} className = "text"  />
-       </>
-       ) 
-    }
+    
   }
 
- const content = loop()?.map((val, idx) =>
-  (<Grid item xs={6} sm={3} key = {idx}>        
-    {textFieldJsx(val,idx)}   
-  </Grid>)
- )
- const handlerMainField  = (event) => {
-  SetQuery(prev =>( {...prev, question:event.target.value } ) )
- }
-  return (
-    <>
-      <form className={classes.root} noValidate autoComplete="off">
-     
-      <TextField id="outlined-basic2" label="Enter a answer" value ={query.question} onChange ={handlerMainField} />
-        
-        
-      </form>
-      <Divider variant="middle" className = {classes.cen} />
-      <form  className={classes.cen} noValidate autoComplete="off">
-        <div className={classes.textRoot}>
-          <Grid container spacing={5}  ref={inputEl}>
-            {content}
-          </Grid>
-        </div>
-        <Buttons textState = {  {...query}}/>
-      </form>
-
-    </>
+ const listTextFields = getListOfTextFields()?.map((val, idx) =>
+  (
+    <Grid item xs={6} sm={3} key = {idx}>        
+      {textFieldJsx(val,idx)}   
+    </Grid>)
   )
+
+
+
+
+
+ const handlerQuestionField  = (event) => {
+  SetCurrentQuestion(prev =>( {...prev, question:event.target.value } ) )
+ }
+
+
+ 
+ let rendoringTextFields = (
+   <>
+     <form className={classes.root} noValidate autoComplete="off">
+    
+     <TextField id="outlined-basic2" label="Enter a answer" value ={currentQuestion.question} onChange ={handlerQuestionField} />
+       
+       
+     </form>
+     <Divider variant="middle" className = {classes.cen} />
+     <form  className={classes.cen} noValidate autoComplete="off">
+       <div className={classes.textRoot}>
+         <Grid container spacing={5}>
+           {listTextFields}
+         </Grid>
+       </div>
+       
+     </form>
+     <Buttons textState = {  {...currentQuestion}}/>
+   </>
+ )
+
+ return  rendoringTextFields
+ 
+ 
+
+
   }
