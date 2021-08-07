@@ -13,7 +13,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Game from './component/gameComponents/game'
 import useStyles from './component/cssModules/app';
-
+import { useEffect } from 'react';
 
 
 
@@ -25,6 +25,13 @@ function App() {
   const mainPrimaryColor = palletType ? orange[500] : lightBlue[500];
   const mainSecondaryColor = palletType ? deepOrange[900] : deepPurple[500];
   
+
+  useEffect(() =>{
+    fetch("http://localhost:8000/api")
+      .then(response => response.text())
+      .then(text => console.log(text))      
+  }, [])
+
 
 
   const darkTheme = createTheme({
@@ -55,6 +62,7 @@ function App() {
       <Route path="/game" exact>
         <Game/>
       </Route>
+      
     </Switch>
   </Router>
   );
