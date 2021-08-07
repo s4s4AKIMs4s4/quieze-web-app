@@ -14,10 +14,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Game from './component/gameComponents/game'
 import useStyles from './component/cssModules/app';
 import { useEffect } from 'react';
+import TestGame from './component/builderComponents/testGame';
 
 
-
-
+const url : string = process.env.REACT_APP_API as string
 
 function App() {
   const palletType = useSelector( (state:RootState) => state.palet.isDark)
@@ -26,11 +26,11 @@ function App() {
   const mainSecondaryColor = palletType ? deepOrange[900] : deepPurple[500];
   
 
-  useEffect(() =>{
-    fetch("http://localhost:8000/api")
-      .then(response => response.text())
-      .then(text => console.log(text))      
-  }, [])
+  // useEffect(() =>{
+  //   fetch(url)
+  //     .then(response => response.text())
+  //     .then(text => console.log(text))      
+  // }, [])
 
 
 
@@ -53,6 +53,7 @@ function App() {
   
   <Router>
     <Switch>
+    <Route path="/gameNotes/:id" exact component={TestGame}/>
       <Route path="/" exact>
         <ThemeProvider theme={darkTheme}>
           <CssBaseline />
@@ -62,6 +63,8 @@ function App() {
       <Route path="/game" exact>
         <Game/>
       </Route>
+      
+        
       
     </Switch>
   </Router>

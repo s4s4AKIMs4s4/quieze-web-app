@@ -6,4 +6,12 @@ router.get("/", function(request, response, next) {
 })
 
 
+router.get('/firebase:id', (req, res, next) => {
+    const res = await axios.post(`${url}/notes.json`, note)
+    
+} )
+
+
+
+
 module.exports = router;

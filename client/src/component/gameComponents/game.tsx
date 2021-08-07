@@ -3,10 +3,16 @@ import Menu from '../commonComponents/menu'
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/rootReducer';
 import { useState, useEffect } from 'react';
-
+import axios from 'axios'
 import Button from '@material-ui/core/Button';
 
+const url = process.env.REACT_APP_DB_URL
+
 export default  function Game(){
+
+
+
+
     // let text  = [
     //     {
     //         question:"Ivan",
@@ -23,6 +29,13 @@ export default  function Game(){
     const [idx,setIdx] = useState(1)
     const [answer,setAnswer] = useState(text[idx])
     
+    // const getQuestion = async () => {
+    //     await axios.delete(`${url}/notes/${id}.json`)
+    // }
+    useEffect(()=>{
+
+    },[]);
+
     useEffect(() => {
         setAnswer(text[idx])
     }, [idx])

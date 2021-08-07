@@ -6,10 +6,11 @@ import {uploand, back} from '../../redux/actions'
 import { RootState } from '../../redux/rootReducer';
 import { useHistory } from 'react-router-dom';
 import useStyles from '../cssModules/nextButtons';
+import axios from 'axios'
 
 
-
-
+const url = 'https://quize-e13b8-default-rtdb.europe-west1.firebasedatabase.app'
+const domen = 'http://localhost:3000'
 
 export default function Buttons(state_l) {
     const classes = useStyles();
@@ -18,6 +19,7 @@ export default function Buttons(state_l) {
     const text  = useSelector( (state:RootState) => state.answer.text)
     const index: number = useSelector( (state:RootState) => state.answer.index)
     const length = text.length  
+
     const dispatch = useDispatch()
 
     const history = useHistory();
@@ -33,7 +35,32 @@ export default function Buttons(state_l) {
       }
       
     }
-    const handleClick = () => history.push('/game');
+
+
+    
+
+    const handleClick = async () => { 
+      // console.log(s2)
+      // const payloud =  JSON.parse(JSON.stringify(s2))
+      // console.log(payloud)
+      const note = {
+        all:text
+      }
+  
+
+
+
+
+      console.log('text')
+      console.log(text)
+      const res = await axios.post(`${url}/notes.json`, note)
+      let link  = `${domen}/gameNotes/${res.data.name}`
+      console.log('link')
+      console.log(res.data)
+      console.log(link)
+      //history.push('/game');
+      
+    }
 
     return(
         <form className={classes.test} noValidate autoComplete="off">

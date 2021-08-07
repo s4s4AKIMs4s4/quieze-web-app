@@ -230,7 +230,7 @@ const giveCorrect = (check, length)=>{
         
         </div>
       </form>
-        <Buttons textState = {  {...query}} functions = {hadlerUpdate} />
+      <Buttons textState = {  {...query}} functions = {hadlerUpdate} />
 
     </>
   )
