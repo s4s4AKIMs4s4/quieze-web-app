@@ -40,9 +40,7 @@ export default function Buttons(state_l) {
     
 
     const handleClick = async () => { 
-      // console.log(s2)
-      // const payloud =  JSON.parse(JSON.stringify(s2))
-      // console.log(payloud)
+
       const note = {
         all:text
       }
@@ -53,7 +51,7 @@ export default function Buttons(state_l) {
 
       console.log('text')
       console.log(text)
-      const res = await axios.post(`${url}/notes.json`, note)
+      const res = await axios.post(`${url}/notes.json`, text)
       let link  = `${domen}/gameNotes/${res.data.name}`
       console.log('link')
       console.log(res.data)

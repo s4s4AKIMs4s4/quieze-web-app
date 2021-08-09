@@ -53,7 +53,7 @@ function App() {
   
   <Router>
     <Switch>
-    <Route path="/gameNotes/:id" exact component={TestGame}/>
+    <Route path="/gameNotes/:id" exact component={Game}/>
       <Route path="/" exact>
         <ThemeProvider theme={darkTheme}>
           <CssBaseline />

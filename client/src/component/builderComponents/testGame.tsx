@@ -18,10 +18,18 @@ export default  function TestGame(props){
 
 
     useEffect(()=>{
-        console.log(props.match.params.id)
-        getQuestion(props.match.params.id).then( res => console.log(res.data) )
+        
         
     },[]);
+
+
+
+
+
+
+
+
+
 
    
 
