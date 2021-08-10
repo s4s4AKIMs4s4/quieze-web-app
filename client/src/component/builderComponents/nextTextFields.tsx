@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import useStyles from '../cssModules/nextTextFields';
-
+import Form from './FormTextFields';
 
 
 
@@ -230,6 +230,8 @@ const giveCorrect = (check, length)=>{
         
         </div>
       </form>
+      {/* <Form text = {props.text} it={it} correctAnswers = {correctAnswers} checkHandler = {checkHandler} textHandler = {textHandler} hadleLastField = {hadleLastField}  /> */}
+
       <Buttons textState = {  {...query}} functions = {hadlerUpdate} />
 
     </>

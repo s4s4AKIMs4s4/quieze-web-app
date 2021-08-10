@@ -8,10 +8,19 @@ import { useEffect } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import useStyles from '../cssModules/backTextFields';
+import Form from './FormTextFields'
 
 
 
 
+const giveCorrect = (check, length)=>{
+  let correct: number[] = [] 
+  for(let it  = 0 ; it<length; it++){
+    if(check[it])
+    correct.push(it)  
+  }
+  return correct
+}
 
 export  function BackTextFields(props) {
   const classes = useStyles();
@@ -32,13 +41,7 @@ export  function BackTextFields(props) {
     }
   }, [props.obj])
 
-  function getListOfTextFields(){
-    let mas:string [] =  [...props.text]
-    for(let i = props.text.length;i<=it;i++){
-      mas[i] = ''
-    }
-    return mas
-  }
+
 
   let textHandler = (idx) =>( (event) => {
       const mas  = currentQuestion?.answers
@@ -48,17 +51,6 @@ export  function BackTextFields(props) {
       SetCurrentQuestion(prev =>( {...prev, ["answers"]: mas } ) )
     }
   )
-
-
-  const giveCorrect = (check, length)=>{
-    let correct: number[] = [] 
-    for(let it  = 0 ; it<length; it++){
-      if(check[it])
-      correct.push(it)  
-    }
-    return correct
-  }
-
 
 
   const checkHandler = (idx) => ((event) => {
@@ -84,47 +76,9 @@ export  function BackTextFields(props) {
     setIt(it+1)
   }
 
-
-
-
-
-
-
-
-  let textFieldJsx = (val,idx) => {
-   
-      return (
-      <>
-        <FormControlLabel
-          control={<Checkbox  checked={correctAnswers[idx]} onChange = {checkHandler(idx)} name="gilad" />}
-          label="Correct answer"
-        />
-
-        {(idx === it)
-          ?<TextField id="outlined-basic2" className = "text" onChange={textHandler(idx)} onClick = {hadleLastField(idx)}/> 
-          :<TextField id="outlined-basic2"  value = {val} onChange={textHandler(idx)} className = "text"  />
-          }
-      </>
-      )    
-    
-  }
-
- const listTextFields = getListOfTextFields()?.map((val, idx) =>
-  (
-    <Grid item xs={6} sm={3} key = {idx}>        
-      {textFieldJsx(val,idx)}   
-    </Grid>)
-  )
-
-
-
-
-
  const handlerQuestionField  = (event) => {
   SetCurrentQuestion(prev =>( {...prev, question:event.target.value } ) )
  }
-
-
  
  let rendoringTextFields = (
    <>
@@ -135,21 +89,14 @@ export  function BackTextFields(props) {
        
      </form>
      <Divider variant="middle" className = {classes.cen} />
-     <form  className={classes.cen} noValidate autoComplete="off">
-       <div className={classes.textRoot}>
-         <Grid container spacing={5}>
-           {listTextFields}
-         </Grid>
-       </div>
-       
-     </form>
+
+    <Form text = {props.text} it={it} correctAnswers = {correctAnswers} checkHandler = {checkHandler} textHandler = {textHandler} hadleLastField = {hadleLastField}  />
+
      <Buttons textState = {  {...currentQuestion}}/>
    </>
  )
 
  return  rendoringTextFields
- 
- 
 
 
   }
