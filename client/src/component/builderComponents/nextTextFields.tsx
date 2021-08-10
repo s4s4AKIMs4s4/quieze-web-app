@@ -16,16 +16,16 @@ import Form from './FormTextFields';
 
 export default function NextTextFields(props) {
   const classes = useStyles();
-  const inputEl = React.useRef<HTMLDivElement | null>(null)
-  const first = React.useRef<HTMLInputElement | null>(null)
+
+
   const [it, setIt] = React.useState(props.text)
   const [reUdate,setReUpdate] = React.useState(false)
-  const [mainField,setMainField] = React.useState("")
-  let index = -1
 
 
 
-  const [checherIdx,setcherIdx] = React.useState({
+
+
+  const [correctAnswers,setcherIdx] = React.useState({
     0:false
   })
 
@@ -35,7 +35,7 @@ export default function NextTextFields(props) {
 
 
   const i:number[] = []  
-  let init: string[] = []
+  let init: string[]  = []
   const [query, SetQuery] = React.useState(
     {
       "question": "",
@@ -47,7 +47,7 @@ export default function NextTextFields(props) {
 
   
   useEffect(() => {
-    index = -1
+   
     setIt(1)
     return () => {
       
@@ -67,10 +67,8 @@ useEffect(()=>{
   setcherIdx({
     0:false
   })
-  if(first.current !== null){ 
-    first.current!.value = '' 
-  }
-  index = -1
+
+
 
 
 
@@ -80,9 +78,7 @@ useEffect(()=>{
 const hadlerUpdate = () =>{
   const ch = !reUdate
   setReUpdate(ch)
-  if(first.current !== null){ 
-    first.current!.value = '' 
-  }
+
   console.log(reUdate)
 }
 
@@ -118,10 +114,10 @@ const giveCorrect = (check, length)=>{
 }
 
 
-  const checkerHandler = (idx) => ((event) => {
-    let check = {...checherIdx}
+  const checkHandler = (idx) => ((event) => {
+    let check = {...correctAnswers}
 
-    if(checherIdx[idx] ){
+    if(correctAnswers[idx] ){
       check[idx] = false      
       setcherIdx( (prev) =>({...prev,[idx]: false}))
     }
@@ -135,76 +131,71 @@ const giveCorrect = (check, length)=>{
 
   })
 
-  const hadleLastClick = (idx) => (event) =>{
-    setcherIdx({...checherIdx,[idx+1]: false})
+  const hadleLastField = (idx) => (event) =>{
+    setcherIdx({...correctAnswers,[idx+1]: false})
     setIt(it+1)
-    if(first.current !== null){ 
-      first.current!.value = '' 
-    }
-    console.log('first')
-    console.log(first.current!.value)
   }
 
 
-  let textFieldJsx = (idx) => {
+  // let textFieldJsx = (idx) => {
     
-    if(idx === it-1){
+  //   if(idx === it-1){
       
-      if(idx === 0){
-        return(
-        <>
-        <FormControlLabel
-        control={<Checkbox   checked={checherIdx[idx]} onChange = {checkerHandler(idx)} name="gilad" />}
-        label="Correct answer"
-        />
-      <TextField ref = {first} id="outlined-basic2" label="Enter a answer" value = {query.answers[idx]} className = "text" onChange={textHandler(idx)} onClick = {hadleLastClick(idx)}/>
-      </>
-      )
-      }
-      // else
-      return (
-        <>
-        <FormControlLabel
-        control={<Checkbox checked={checherIdx[idx]} onChange = {checkerHandler(idx)}  name="gilad" />}
-        label="Correct answer"
-        />
-      <TextField id="outlined-basic2" label="Enter a answer" className = "text" value = {query.answers[idx]} onChange={textHandler(idx)} onClick = {hadleLastClick(idx)}/>
-      </>
-      )    
+  //     if(idx === 0){
+  //       return(
+  //       <>
+  //       <FormControlLabel
+  //       control={<Checkbox   checked={correctAnswers[idx]} onChange = {checkHandler(idx)} name="gilad" />}
+  //       label="Correct answer"
+  //       />
+  //     <TextField ref = {first} id="outlined-basic2" label="Enter a answer" value = {query.answers[idx]} className = "text" onChange={textHandler(idx)} onClick = {hadleLastField(idx)}/>
+  //     </>
+  //     )
+  //     }
+  //     // else
+  //     return (
+  //       <>
+  //       <FormControlLabel
+  //       control={<Checkbox checked={correctAnswers[idx]} onChange = {checkHandler(idx)}  name="gilad" />}
+  //       label="Correct answer"
+  //       />
+  //     <TextField id="outlined-basic2" label="Enter a answer" className = "text" value = {query.answers[idx]} onChange={textHandler(idx)} onClick = {hadleLastField(idx)}/>
+  //     </>
+  //     )    
       
-    }
-    else{
+  //   }
+  //   else{
 
-      if(idx === 0 ){
-      return(
-      <>
-      <FormControlLabel
-        control={<Checkbox checked={checherIdx[idx]} value = {query.answers[idx]} onChange = {checkerHandler(idx)} name="gilad" />}
-        label="Correct answer"
-        />
-      <TextField  ref = {first} id="outlined-basic2" label="Enter a answer" onChange={textHandler(idx)} className = "text"  /> 
-      </>
-      )
-      }
-      else
-      return (
+  //     if(idx === 0 ){
+  //     return(
+  //     <>
+  //     <FormControlLabel
+  //       control={<Checkbox checked={correctAnswers[idx]} value = {query.answers[idx]} onChange = {checkHandler(idx)} name="gilad" />}
+  //       label="Correct answer"
+  //       />
+  //     <TextField  ref = {first} id="outlined-basic2" label="Enter a answer" onChange={textHandler(idx)} className = "text"  /> 
+  //     </>
+  //     )
+  //     }
+  //     else
+  //     return (
 
-      <>
-        <FormControlLabel
-        control={<Checkbox checked={checherIdx[idx]} onChange = {checkerHandler(idx)} name="gilad" />}
-        label="Correct answer"
-        />
-      <TextField id="outlined-basic2" label="Enter a answer" value = {query.answers[idx]} onChange={textHandler(idx)} className = "text"  /> 
-      </>
-      ) 
-    }
-  }
+  //     <>
+  //       <FormControlLabel
+  //       control={<Checkbox checked={correctAnswers[idx]} onChange = {checkHandler(idx)} name="gilad" />}
+  //       label="Correct answer"
+  //       />
+  //     <TextField id="outlined-basic2" label="Enter a answer" value = {query.answers[idx]} onChange={textHandler(idx)} className = "text"  /> 
+  //     </>
+  //     ) 
+  //   }
+  // }
 
- const content = loop()?.map((val, idx) =>
-  (<Grid item xs={6} sm={3} key = { index++ }  >        
-    {textFieldJsx(idx)}   
-  </Grid>)
- )
+//  const content = loop()?.map((val, idx) =>
+//   (<Grid item xs={6} sm={3} key = { index++ }  >        
+//     {textFieldJsx(idx)}   
+//   </Grid>)
+//  )
 
 
  const handlerMainField  = (event) => {
@@ -221,7 +212,7 @@ const giveCorrect = (check, length)=>{
         
       </form>
       <Divider variant="middle" className = {classes.cen} />
-      <form  className={classes.cen} noValidate autoComplete="off">
+      {/* <form  className={classes.cen} noValidate autoComplete="off">
         <div className={classes.textRoot}>
        
           <Grid container spacing={5}  ref={inputEl}>
@@ -229,8 +220,8 @@ const giveCorrect = (check, length)=>{
           </Grid>
         
         </div>
-      </form>
-      {/* <Form text = {props.text} it={it} correctAnswers = {correctAnswers} checkHandler = {checkHandler} textHandler = {textHandler} hadleLastField = {hadleLastField}  /> */}
+      </form> */}
+      <Form answers = {query?.answers} text = {props.text} it={it} correctAnswers = {correctAnswers} checkHandler = {checkHandler} textHandler = {textHandler} hadleLastField = {hadleLastField}  />
 
       <Buttons textState = {  {...query}} functions = {hadlerUpdate} />
 
