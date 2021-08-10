@@ -22,19 +22,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default  function Game(props){
 
-    // let text  = [
-    //     {
-    //         question:"Ivan",
-    //         answers:["1","2","3","4"],
-    //         true:[0]
-    //     },  
-    //     {
-    //         question:"Vadim",
-    //         answers:["1","2","3","4","5"],
-    //         true:[1]
-    //     }, 
-    // ]
-
 
     const initText = {
         question: "nul",
@@ -55,10 +42,7 @@ export default  function Game(props){
         let temp = await axios.get(`${url}/notes/${id}.json`)
         return temp
     }
-    // setTimeout(() => {
-    //     console.log('time txt')
-    //     console.log(text)
-    // }, 5000);
+
     
     useEffect(()=>{
         console.debug()
