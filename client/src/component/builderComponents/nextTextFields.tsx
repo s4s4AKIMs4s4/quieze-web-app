@@ -1,107 +1,11 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
-import { Grid } from '@material-ui/core';
 import Buttons from './nextButtons'
 import { useEffect } from 'react';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import useStyles from '../cssModules/nextTextFields';
-import Form from './FormTextFields';
+import Form from './Form';
 
-
-
-
-
-
-export default function NextTextFields(props) {
-  const classes = useStyles();
-
-
-  const [it, setIt] = React.useState(props.text)
-  const [reUdate,setReUpdate] = React.useState(false)
-
-
-
-
-
-  const [correctAnswers,setcherIdx] = React.useState({
-    0:false
-  })
-
-
-
-  
-
-
-  const i:number[] = []  
-  let init: string[]  = []
-  const [query, SetQuery] = React.useState(
-    {
-      "question": "",
-      "answers":init,
-      "true": i,
-    }
-  ) 
-  
-
-  
-  useEffect(() => {
-   
-    setIt(1)
-    return () => {
-      
-      setIt(1)
-    }
-  }, [])
-
-
-useEffect(()=>{
-  setIt(1)
-  SetQuery({
-    "question": "",
-    "answers":init,
-    "true": i,
-  })
-  
-  setcherIdx({
-    0:false
-  })
-
-
-
-
-
-},[reUdate])
-
-
-const hadlerUpdate = () =>{
-  const ch = !reUdate
-  setReUpdate(ch)
-
-  console.log(reUdate)
-}
-
-
-function loop(){
-    let mas:number [] = new Array(it)
-    for(let i = 0;i<it;i++){
-      mas[i] = i
-    }
-    return mas
-  }
-
-  let textHandler = (idx) =>( (event) => {
-
-      const mas  = query?.answers
-      mas[idx] = event.target.value
-
-
-      SetQuery(prev =>( {...prev, ["answers"]: mas } ) )
-
-
-    }
-  )
 
 
 const giveCorrect = (check, length)=>{
@@ -114,117 +18,103 @@ const giveCorrect = (check, length)=>{
 }
 
 
+export default function NextTextFields(props) {
+  const classes = useStyles();
+  
+  const [it, setIt] = React.useState(props.text)
+  const [reUdate,setReUpdate] = React.useState(false)
+  
+  
+  //initialization correctAnswersState
+  const initcorrectAnswers: {
+    [index: number] :boolean
+  }  = {
+    0:false,
+    1:false,
+  }
+
+  const [correctAnswers,setCorrectAnswers] = React.useState({
+    ...initcorrectAnswers
+  })
+
+  //initialization current question
+  const initTrueAnswers:number[] = []  
+  const initAnswers: string[]  = []
+  const initQuestion: string = ""
+  
+  const initCurrentQuestion = {
+    "question": initQuestion,
+    "answers": initAnswers,
+    "true": initTrueAnswers,
+  }
+
+  const [currentQuestion, SetCurrentQuestion] = React.useState(
+     initCurrentQuestion
+    ) 
+  
+  useEffect(() => {
+    setIt(1)
+  }, [])
+
+
+  useEffect(()=>{
+    setIt(1)
+    SetCurrentQuestion(initCurrentQuestion)
+  
+   setCorrectAnswers({
+      ...initcorrectAnswers
+    })
+  },[reUdate])
+
+
+const hadlerUpdate = () =>{ 
+  setReUpdate(!reUdate)
+}
+
+let textHandler = (idx) =>( (event) => {
+      const mas  = currentQuestion?.answers
+      mas[idx] = event.target.value
+
+      SetCurrentQuestion(prev =>( {...prev, ["answers"]: mas } ) )
+    })
+
   const checkHandler = (idx) => ((event) => {
     let check = {...correctAnswers}
 
     if(correctAnswers[idx] ){
       check[idx] = false      
-      setcherIdx( (prev) =>({...prev,[idx]: false}))
+      setCorrectAnswers( (prev) =>({...prev,[idx]: false}))
     }
     else {
       check[idx] = true 
-      setcherIdx( (prev) =>({...prev,[idx]: true}))
+      setCorrectAnswers( (prev) =>({...prev,[idx]: true}))
     }
     const length = Object.values(check).length
     const correct = giveCorrect(check,length)
-    SetQuery(prev =>( {...prev, true: correct } ) )
+    SetCurrentQuestion(prev =>( {...prev, true: correct } ) )
 
   })
 
   const hadleLastField = (idx) => (event) =>{
-    setcherIdx({...correctAnswers,[idx+1]: false})
+    setCorrectAnswers({...correctAnswers,[idx+1]: false})
     setIt(it+1)
   }
 
-
-  // let textFieldJsx = (idx) => {
-    
-  //   if(idx === it-1){
-      
-  //     if(idx === 0){
-  //       return(
-  //       <>
-  //       <FormControlLabel
-  //       control={<Checkbox   checked={correctAnswers[idx]} onChange = {checkHandler(idx)} name="gilad" />}
-  //       label="Correct answer"
-  //       />
-  //     <TextField ref = {first} id="outlined-basic2" label="Enter a answer" value = {query.answers[idx]} className = "text" onChange={textHandler(idx)} onClick = {hadleLastField(idx)}/>
-  //     </>
-  //     )
-  //     }
-  //     // else
-  //     return (
-  //       <>
-  //       <FormControlLabel
-  //       control={<Checkbox checked={correctAnswers[idx]} onChange = {checkHandler(idx)}  name="gilad" />}
-  //       label="Correct answer"
-  //       />
-  //     <TextField id="outlined-basic2" label="Enter a answer" className = "text" value = {query.answers[idx]} onChange={textHandler(idx)} onClick = {hadleLastField(idx)}/>
-  //     </>
-  //     )    
-      
-  //   }
-  //   else{
-
-  //     if(idx === 0 ){
-  //     return(
-  //     <>
-  //     <FormControlLabel
-  //       control={<Checkbox checked={correctAnswers[idx]} value = {query.answers[idx]} onChange = {checkHandler(idx)} name="gilad" />}
-  //       label="Correct answer"
-  //       />
-  //     <TextField  ref = {first} id="outlined-basic2" label="Enter a answer" onChange={textHandler(idx)} className = "text"  /> 
-  //     </>
-  //     )
-  //     }
-  //     else
-  //     return (
-
-  //     <>
-  //       <FormControlLabel
-  //       control={<Checkbox checked={correctAnswers[idx]} onChange = {checkHandler(idx)} name="gilad" />}
-  //       label="Correct answer"
-  //       />
-  //     <TextField id="outlined-basic2" label="Enter a answer" value = {query.answers[idx]} onChange={textHandler(idx)} className = "text"  /> 
-  //     </>
-  //     ) 
-  //   }
-  // }
-
-//  const content = loop()?.map((val, idx) =>
-//   (<Grid item xs={6} sm={3} key = { index++ }  >        
-//     {textFieldJsx(idx)}   
-//   </Grid>)
-//  )
-
-
- const handlerMainField  = (event) => {
-  SetQuery(prev =>( {...prev, question:event.target.value } ) )
+ const handlerQuestionField  = (event) => {
+  SetCurrentQuestion(prev =>( {...prev, question:event.target.value } ) )
 
  }
 
   return (
     <>
-      <form className={classes.root} noValidate autoComplete="off">
-     
-      <TextField id="outlined-basic2" value = {query.question} label="Enter a answer" onChange = {handlerMainField}/>
-        
-        
+      <form className={classes.root} noValidate autoComplete="off"> 
+        <TextField id="outlined-basic2" value = {currentQuestion.question} label="Enter a answer" onChange = {handlerQuestionField}/>
       </form>
+
       <Divider variant="middle" className = {classes.cen} />
-      {/* <form  className={classes.cen} noValidate autoComplete="off">
-        <div className={classes.textRoot}>
-       
-          <Grid container spacing={5}  ref={inputEl}>
-            {content}
-          </Grid>
-        
-        </div>
-      </form> */}
-      <Form answers = {query?.answers} text = {props.text} it={it} correctAnswers = {correctAnswers} checkHandler = {checkHandler} textHandler = {textHandler} hadleLastField = {hadleLastField}  />
-
-      <Buttons textState = {  {...query}} functions = {hadlerUpdate} />
-
+      <Form answers = {currentQuestion?.answers} text = {props.text} it={it} correctAnswers = {correctAnswers} checkHandler = {checkHandler} textHandler = {textHandler} hadleLastField = {hadleLastField}  />
+      
+      <Buttons textState = {  {...currentQuestion}} functions = {hadlerUpdate} />
     </>
   )
-  }
+}

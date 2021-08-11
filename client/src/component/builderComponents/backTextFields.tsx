@@ -1,17 +1,10 @@
 import React from 'react';
-
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
-import { Grid } from '@material-ui/core';
 import Buttons from './backButtons'
 import { useEffect } from 'react';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import useStyles from '../cssModules/backTextFields';
-import Form from './FormTextFields'
-
-
-
+import Form from './Form'
 
 const giveCorrect = (check, length)=>{
   let correct: number[] = [] 

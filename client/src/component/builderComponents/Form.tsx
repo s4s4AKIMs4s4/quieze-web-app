@@ -3,8 +3,6 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
 import { Grid } from '@material-ui/core';
-import Buttons from './backButtons'
-import { useEffect } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import useStyles from '../cssModules/backTextFields';
@@ -13,7 +11,6 @@ import useStyles from '../cssModules/backTextFields';
 export default function Form(props){
     const classes = useStyles()
     
-
     const checkfornumber = (values, index) => {
         if(values.length === 0)
             return false
@@ -25,37 +22,34 @@ export default function Form(props){
         }
     }
 
+    const getNextList = () => {
+        let list = new Array(props.it)
+        for(let i = 0 ;i<=props.it;i++){
+            if( checkfornumber(props.answers,i) )
+                list[i] = props.answers[i]
+            else
+                list[i] = ''
+        }
+        return list
+    }
 
+    const getBackList = () => {
+        let list =  [...props.text]
+        for(let i = props.text.length;i<=props.it;i++){
+            list[i] = ''
+        }
+        return list 
+    }
     
     function getListOfTextFields(){
-        let mas:string[]
-        console.log(props.text)
+        let listOfTextFields:string[]
         if( props.text !== 1){
-            mas =  [...props.text]
-            for(let i = props.text.length;i<=props.it;i++){
-                mas[i] = ''
-            }
+            listOfTextFields =  getBackList()
         }
         else{
-            console.log('props')
-            console.log(props.it)
-            mas = new Array(props.it)
-            console.log(props.answers)
-            for(let i = 0 ;i<=props.it;i++){
-                if( checkfornumber(props.answers,i) )
-                    {
-                        console.log( 'props.answers[i]' )
-                        console.log(props.answers[i])
-                        mas[i] = props.answers[i]
-                    }
-                else
-                    mas[i] = ''
-                 
-            }
+            listOfTextFields = getNextList()
         }
-
-
-        return mas
+        return listOfTextFields
       }
     
     let textFieldJsx = (val,idx) => {
