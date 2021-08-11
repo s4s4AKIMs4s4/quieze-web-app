@@ -15,12 +15,8 @@ export default function Quize(){
     let allQuestions  = useSelector( (state:RootState) => state.answer.text)
     let currentQuestion: number = useSelector( (state:RootState) => state.answer.index) + 1
     let pressedButton: string = useSelector( (state:RootState) => state.answer.buttonString)
-    let it = 0
     allQuestions = JSON.parse(JSON.stringify(allQuestions))
     
-
-
-
     const getCorrectAnswers = (indexOfCorrectAnswers, allQuestions) => {
         let correctAnswers = {}
 
@@ -28,16 +24,17 @@ export default function Quize(){
 
         indexOfCorrectAnswers.forEach((val) =>{ 
             correctAnswers[val] = true
-        })  
+        })
+        
+        correctAnswers[allQuestions.length] = false
         return correctAnswers
 
     }
 
 
     function pickPageForRendor() {
-        it++;
         if (pressedButton === "BACK" || pressedButton === "UPDATE" ){ 
-            const correctAnswers = getCorrectAnswers(allQuestions[currentQuestion].true, allQuestions  )
+            const correctAnswers = getCorrectAnswers(allQuestions[currentQuestion].true, allQuestions[currentQuestion].answers  )
             return (<BackTextFields text = {allQuestions[currentQuestion].answers} obj = {allQuestions[currentQuestion]} correct = {correctAnswers}/>)
         }
 

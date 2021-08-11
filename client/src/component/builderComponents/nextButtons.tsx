@@ -1,10 +1,9 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { useDispatch,useSelector } from 'react-redux';
-import { useCallback } from 'react';
 import {uploand, back} from '../../redux/actions'
 import { RootState } from '../../redux/rootReducer';
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 import useStyles from '../cssModules/nextButtons';
 import axios from 'axios'
 
@@ -18,11 +17,11 @@ export default function Buttons(state_l) {
     const s2 = Object.assign({},state_l.textState)
     const text  = useSelector( (state:RootState) => state.answer.text)
     const index: number = useSelector( (state:RootState) => state.answer.index)
-    const length = text.length  
+    // const length = text.length  
 
     const dispatch = useDispatch()
 
-    const history = useHistory();
+    // const history = useHistory();
 
     const handler = () => {
       dispatch(uploand(s2));
@@ -40,14 +39,6 @@ export default function Buttons(state_l) {
     
 
     const handleClick = async () => { 
-
-      const note = {
-        all:text
-      }
-  
-
-
-
 
       console.log('text')
       console.log(text)

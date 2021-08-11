@@ -34,7 +34,8 @@ export default function NextTextFields(props) {
   }
 
   const [correctAnswers,setCorrectAnswers] = React.useState({
-    ...initcorrectAnswers
+    0:false,
+    1:false,
   })
 
   //initialization current question
@@ -60,10 +61,10 @@ export default function NextTextFields(props) {
   useEffect(()=>{
     setIt(1)
     SetCurrentQuestion(initCurrentQuestion)
-  
-   setCorrectAnswers({
-      ...initcorrectAnswers
-    })
+    setCorrectAnswers({
+      0:false,
+      1:false,
+      })
   },[reUdate])
 
 
@@ -75,7 +76,7 @@ let textHandler = (idx) =>( (event) => {
       const mas  = currentQuestion?.answers
       mas[idx] = event.target.value
 
-      SetCurrentQuestion(prev =>( {...prev, ["answers"]: mas } ) )
+      SetCurrentQuestion(prev =>( {...prev, answers: mas } ) )
     })
 
   const checkHandler = (idx) => ((event) => {

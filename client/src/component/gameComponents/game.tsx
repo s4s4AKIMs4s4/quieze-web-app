@@ -1,7 +1,4 @@
 
-import Menu from '../commonComponents/menu'
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/rootReducer';
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 import Button from '@material-ui/core/Button';
@@ -22,7 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default  function Game(props){
 
-
     const initText = {
         question: "nul",
         answers:['null'],
@@ -39,26 +35,19 @@ export default  function Game(props){
     const classes = useStyles();
 
     const getQuestion = async id => {
-        let temp = await axios.get(`${url}/notes/${id}.json`)
-        return temp
+        return await axios.get(`${url}/notes/${id}.json`)
     }
 
     
     useEffect(()=>{
-        console.debug()
-        let text 
-        console.log(props.match.params.id)
-        getQuestion(props.match.params.id).then( res =>{ console.log(res.data);text = res.data; setText(prev =>  JSON.parse(JSON.stringify(res.data))  ); setIdx(prev => prev+1); setLouder(false)  } )
-        console.log('text []')
-      
-
+        getQuestion(props.match.params.id).then(res =>{
+                setText(prev =>  JSON.parse(JSON.stringify(res.data)) ); 
+                setIdx(prev => prev+1); 
+                setLouder(false) 
+            })
     },[]);
 
     useEffect(() => {
-        console.log('idx')
-        console.log(idx)
-        console.log('text')
-        console.log(text)
         setAnswer(text[idx])
     }, [idx])
 
@@ -78,12 +67,10 @@ export default  function Game(props){
 
     const buttons = (
         answer.answers.map((val, idx) => (
-        <Button variant="contained" color="primary" onClick = {handlerIdx(idx)}>
+            <Button variant="contained" color="primary" onClick = {handlerIdx(idx)}>
                 {val}
             </Button>
-        )
-        
-        )
+        ))
     )
 
     const questionText = () =>{
@@ -101,24 +88,14 @@ export default  function Game(props){
     return (
         <div>
             {louderJsx}
-            {!louder &&     
-            <div>
-                {questionText()}
-                <div></div>
-                {buttons}
-            </div>
-
-
-   
+            {
+                !louder &&     
+                <div>
+                    {questionText()}
+                    <div></div>
+                    {buttons}
+                </div>
             }
-            
-                     
-            
-            
-            
         </div>
-
     )
-
-
 }

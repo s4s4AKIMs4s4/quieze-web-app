@@ -28,10 +28,6 @@ export  function BackTextFields(props) {
     setСorrectAnswers(props.correct)
     SetCurrentQuestion(props.obj)
     
-    return () => {
-    
-      setIt(1)
-    }
   }, [props.obj])
 
 
@@ -41,7 +37,7 @@ export  function BackTextFields(props) {
       mas[idx] = event.target.value
       console.log('value')
       console.log(mas[idx])
-      SetCurrentQuestion(prev =>( {...prev, ["answers"]: mas } ) )
+      SetCurrentQuestion(prev =>( {...prev, answers: mas } ) )
     }
   )
 
@@ -83,7 +79,7 @@ export  function BackTextFields(props) {
      </form>
      <Divider variant="middle" className = {classes.cen} />
 
-    <Form text = {props.text} it={it} correctAnswers = {correctAnswers} checkHandler = {checkHandler} textHandler = {textHandler} hadleLastField = {hadleLastField}  />
+    <Form text = {currentQuestion?.answers} it={it} correctAnswers = {correctAnswers} checkHandler = {checkHandler} textHandler = {textHandler} hadleLastField = {hadleLastField}  />
 
      <Buttons textState = {  {...currentQuestion}}/>
    </>
