@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
-import Buttons from './backButtons'
+import Buttons from './nextButtons'
 import { useEffect } from 'react';
 import useStyles from '../cssModules/backTextFields';
 import Form from './Form'
@@ -71,17 +71,15 @@ export  function BackTextFields(props) {
  
  let rendoringTextFields = (
    <>
-     <form className={classes.root} noValidate autoComplete="off">
-    
-     <TextField id="outlined-basic2" label="Enter a answer" value ={currentQuestion.question} onChange ={handlerQuestionField} />
-       
-       
+     <form className={classes.root} noValidate autoComplete="off"> 
+      <TextField id="outlined-basic2" label="Enter a answer" value ={currentQuestion.question} onChange ={handlerQuestionField} /> 
      </form>
-     <Divider variant="middle" className = {classes.cen} />
+     
+      <Divider variant="middle" className = {classes.cen} />
+      
+      <Form text = {currentQuestion?.answers} it={it} correctAnswers = {correctAnswers} checkHandler = {checkHandler} textHandler = {textHandler} hadleLastField = {hadleLastField}  />
 
-    <Form text = {currentQuestion?.answers} it={it} correctAnswers = {correctAnswers} checkHandler = {checkHandler} textHandler = {textHandler} hadleLastField = {hadleLastField}  />
-
-     <Buttons textState = {  {...currentQuestion}}/>
+      <Buttons currentTextState = {  {...currentQuestion}}/>
    </>
  )
 

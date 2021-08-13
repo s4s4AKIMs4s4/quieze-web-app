@@ -115,7 +115,7 @@ let textHandler = (idx) =>( (event) => {
       <Divider variant="middle" className = {classes.cen} />
       <Form answers = {currentQuestion?.answers} text = {props.text} it={it} correctAnswers = {correctAnswers} checkHandler = {checkHandler} textHandler = {textHandler} hadleLastField = {hadleLastField}  />
       
-      <Buttons textState = {  {...currentQuestion}} functions = {hadlerUpdate} />
+      <Buttons currentTextState = {  {...currentQuestion}} updatePage = {hadlerUpdate} />
     </>
   )
 }

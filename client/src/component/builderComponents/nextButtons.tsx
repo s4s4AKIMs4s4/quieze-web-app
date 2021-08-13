@@ -1,118 +1,75 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { useDispatch,useSelector } from 'react-redux';
-import {uploand, back, setLink} from '../../redux/actions'
+import {uploand, back, setLink, update} from '../../redux/actions'
 import { RootState } from '../../redux/rootReducer';
 import { useHistory } from 'react-router-dom';
 import useStyles from '../cssModules/nextButtons';
 import axios from 'axios'
 import { useState } from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Backdrop from '@material-ui/core/Backdrop';
+import BackDrop from '../commonComponents/backDrop'
 
 const url = 'https://quize-e13b8-default-rtdb.europe-west1.firebasedatabase.app'
 const domen = 'http://localhost:3000'
 
-export default function Buttons(state_l) {
-    const classes = useStyles();
-   
-    const s2 = Object.assign({},state_l.textState)
-    const text  = useSelector( (state:RootState) => state.answer.text)
-    const index: number = useSelector( (state:RootState) => state.answer.index)
-    const [louder, setLouder] = useState(false)
+export default function Buttons(stateToReducer) {
+  const classes = useStyles();   
+  const text  = useSelector( (state:RootState) => state.answer.text)
+  const index: number = useSelector( (state:RootState) => state.answer.index)
+  const [louder, setLouder] = useState(false)
+  const length = text.length  
 
+  const dispatch = useDispatch()
+  const history = useHistory();
 
-    // const length = text.length  
-
-    const dispatch = useDispatch()
-
-    const history = useHistory();
-
-    const handler = () => {
-      dispatch(uploand(s2));
-      state_l.functions()
+  const handlerNextClick = () => {
+    //choose between to make step back or next 
+    if(Object.keys(stateToReducer).length > 1){
+      dispatch(uploand(stateToReducer.currentTextState));
+      //update page
+      stateToReducer.updatePage()
     }
-
-    const handlerBack = () =>{
-      if(index !== 0){
-        dispatch(back())
-      }
-      
+    else{
+      //the page will be refreshed automatically
+      dispatch(update(text, stateToReducer.currentTextState, index,length));
     }
+  }
 
-
-    
-
-    const handleClick = async () => { 
-      setLouder( prev => !prev)
-      const res = await axios.post(`${url}/notes.json`, text)
-      setLouder( prev => !prev)
-
-      let link  = `${domen}/gameNotes/${res.data.name}`
-      dispatch(setLink(link))
-      console.log(link)
-      history.push('/game');
-      
+  const handlerBack = () =>{
+    if(index !== 0){
+      dispatch(back())
     }
+  }
 
+  const handleSaveClick = async () => { 
+    setLouder( prev => !prev)
+    const res = await axios.post(`${url}/notes.json`, text)
+    setLouder( prev => !prev)
 
-    const louderJsx = (
-      <Backdrop className={classes.backdrop} open={louder}>
-          <CircularProgress color="inherit" />
-      </Backdrop>
-      )
+    let link  = `${domen}/gameNotes/${res.data.name}`
+    dispatch(setLink(link))
+    console.log(link)
 
+    history.push('/game');
 
-      let FormNuttons = (v) => {
-        
-        return (<form className={classes.test} noValidate autoComplete="off">
-            <div className={classes.middle}>
-           
-                                  
-                
-                <Button  onClick = {handlerBack}> Back</Button>
-                <Button  onClick = {handler}>Next</Button>
-                
-                <Button  onClick={handleClick}>  
-                  Save
-                </Button> 
-                
-            
-            </div>
-        </form>
-      )
-      }
+  }
 
-
-    return(
-
-
-
-
-
-      <div>
-      {
-        (!louder)
-          ?  <form className={classes.test} noValidate autoComplete="off">
-          <div className={classes.middle}>
-         
-                                
-              
-              <Button  onClick = {handlerBack}> Back</Button>
-              <Button  onClick = {handler}>Next</Button>
-              
-              <Button  onClick={handleClick}>  
-                Save
-              </Button> 
-              
-          
-          </div>
-      </form>
-          : <Backdrop className={classes.backdrop} open={louder}>
-              <CircularProgress color="inherit" />
-            </Backdrop>
-      }
-    </div>  
+  return(
+    <div>
+    {
+      (!louder)
+        ?  <form className={classes.test} noValidate autoComplete="off">
+              <div className={classes.middle}>
+                  <Button  onClick = {handlerBack}> Back</Button>
+                  <Button  onClick = {handlerNextClick}>Next</Button>  
+                  <Button  onClick={handleSaveClick}>  
+                    Save
+                  </Button>        
+              </div>
+            </form>
+        : <BackDrop louder = {louder}/>
+    }
+  </div>  
       
   );
 }
