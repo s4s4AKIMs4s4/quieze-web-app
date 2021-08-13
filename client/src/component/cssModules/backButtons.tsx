@@ -6,7 +6,6 @@ const useStyles = makeStyles((theme: Theme) =>
         position:'relative',
         top:'1vh',
         left:'32vw',
-        
       },
     })
 )

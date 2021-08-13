@@ -13,7 +13,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Game from './component/gameComponents/game'
 import useStyles from './component/cssModules/app';
-
+import GeneratedLink from './component/gameComponents/generatedLink'
 
 
 function App() {
@@ -47,24 +47,25 @@ function App() {
   const classes = useStyles();
   console.log(classes)
   return (
-  
+    <ThemeProvider theme={darkTheme}>
   <Router>
     <Switch>
     <Route path="/gameNotes/:id" exact component={Game}/>
       <Route path="/" exact>
-        <ThemeProvider theme={darkTheme}>
+        
           <CssBaseline />
           <Quize/>
-        </ThemeProvider>
+        
       </Route>
       <Route path="/game" exact>
-        <Game/>
+        <GeneratedLink/>
       </Route>
       
         
       
     </Switch>
   </Router>
+  </ThemeProvider>
   );
 
 

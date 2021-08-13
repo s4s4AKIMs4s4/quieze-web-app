@@ -4,25 +4,45 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    test:{
-      position:'fixed',
-      top:'85vh',
-      left:'65vw',
+    // test:{
+    //   position:'fixed',
+    //   top:'100vh',
+    //   left:'100vw',
 
-    },
+    // },
     root: {
-      display: 'flex',
+      position: 'relative',
      
-      flexWrap: 'wrap',
+     
       '& > *': {
+        position: 'relative',
+        // marginTop:'12vh',
+        // marginLeft:'9vw',
+        // marginRight:'9vw',  
+        // margin: theme.spacing(1),
         
-        marginTop:'12vh',
-        marginLeft:'9vw',
-        marginRight:'9vw',  
-        margin: theme.spacing(1),
-        width:'100%',
-        height: theme.spacing(80),
+        left:"17.5vw",
+        top:"7vw",
+        width:'65vw',
+        height: '80vh',
+
+        [theme.breakpoints.down('sm')]:{
+          left:"19.5vw",
+          top:"12vw",
+          width:'65vw',
+          height: '80vh',
+        },
+
+        [theme.breakpoints.down('xs')]:{
+          left:"7vw",
+          top:"20vw",
+          width:'85vw',
+        }
+
       },
+
+
+
     },
   }),
 );

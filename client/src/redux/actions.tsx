@@ -1,4 +1,4 @@
-import {DARK_STATE,LIGTH_STATE,BACK, UPLOAD, NEXT, UPDATE} from './types'
+import {DARK_STATE,LIGTH_STATE,BACK, UPLOAD, NEXT, UPDATE, SETLINK} from './types'
 
 export function showDark(){
     return {
@@ -18,6 +18,14 @@ export function uploand(payloud){
     return{
         type:UPLOAD,
         payloud:payloud,
+    }
+}
+
+export function setLink(payloud){
+    
+    return{
+        type: SETLINK,
+        payloud: payloud,
     }
 }
 
