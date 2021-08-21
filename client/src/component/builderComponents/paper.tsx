@@ -3,7 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import useStyles from '../cssModules/paper';
 
 
-export default function SimplePaper( {children}) {
+function SimplePaper( {children}) {
   const classes = useStyles();
   
   return (
@@ -16,3 +16,6 @@ export default function SimplePaper( {children}) {
     </>
   );
 }
+
+
+export default  React.memo(SimplePaper)

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import Button from '@material-ui/core/Button';
 import { useDispatch,useSelector } from 'react-redux';
 import {uploand, back, setLink, update} from '../../../redux/actions'
@@ -26,11 +26,25 @@ function Buttons(stateToReducer) {
     dispatch(update(text, stateToReducer.currentTextState, index,length));
   }
 
+
+
+
+
   const handlerBack = () =>{
     if(index !== 0){
       dispatch(back())
     }
   }
+
+  const MemoHandlerBack = useCallback((
+    handlerBack
+  ), [index])
+
+
+  const MemoNextClick = useCallback((
+    
+    handlerNextClick
+  ), [index])
 
   const handleSaveClick = async () => { 
     setLouder( prev => !prev)
@@ -51,7 +65,7 @@ function Buttons(stateToReducer) {
       (!louder)
         ?  <form className={classes.test} noValidate autoComplete="off">
               <div className={classes.middle}>
-                  <Button  onClick = {handlerBack}> Back</Button>
+                  <Button  onClick = {MemoHandlerBack}> Back</Button>
                   <Button  onClick = {handlerNextClick}>Next</Button>  
                   <Button  onClick={handleSaveClick}>  
                     Save

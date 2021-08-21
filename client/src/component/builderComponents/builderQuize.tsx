@@ -4,11 +4,7 @@ import NextTextFields from './nextTextFields'
 import Papers from './paper'
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/rootReducer';
-import {BackTextFields} from './backTextFields'
-
-
-
-
+import BackTextFields from './backTextFields'
 
 
 export default function Quize(){

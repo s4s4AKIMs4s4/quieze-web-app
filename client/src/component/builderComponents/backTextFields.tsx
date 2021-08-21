@@ -16,7 +16,7 @@ const giveCorrect = (check, length)=>{
   return correct
 }
 
-export  function BackTextFields(props) {
+export default  function BackTextFields(props) {
   const classes = useStyles();
   const [it, setIt] = React.useState(props.text.length)
   const [correctAnswers,setСorrectAnswers] = React.useState(props.correct)
@@ -101,3 +101,5 @@ export  function BackTextFields(props) {
 
 
   }
+
+//  export default React.memo(BackTextFields)
