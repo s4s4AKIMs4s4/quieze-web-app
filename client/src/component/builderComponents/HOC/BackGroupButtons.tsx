@@ -8,9 +8,10 @@ import useStyles from '../../cssModules/nextButtons';
 import axios from 'axios'
 import { useState } from 'react';
 import BackDrop from '../../commonComponents/backDrop'
+import {apiFireBase} from '../abstaraction/webAbstraction'
 
-const url = 'https://quize-e13b8-default-rtdb.europe-west1.firebasedatabase.app'
-const domen = 'http://localhost:3000'
+// const url = 'https://quize-e13b8-default-rtdb.europe-west1.firebasedatabase.app'
+// const domen = 'http://localhost:3000'
 
 function Buttons(stateToReducer) {
   const classes = useStyles();   
@@ -48,10 +49,15 @@ function Buttons(stateToReducer) {
 
   const handleSaveClick = async () => { 
     setLouder( prev => !prev)
-    const res = await axios.post(`${url}/notes.json`, text)
+
+    const firebase: apiFireBase = new apiFireBase()
+    
+    //const res = await axios.post(`${url}/notes.json`, text)
+    setLouder( prev => !prev)
+    const res = await firebase?.sendPost('notes.json', text)
     setLouder( prev => !prev)
 
-    let link  = `${domen}/gameNotes/${res.data.name}`
+    const link  = `${firebase?.domen}/gameNotes/${res?.data.name}`
     dispatch(setLink(link))
     console.log(link)
 

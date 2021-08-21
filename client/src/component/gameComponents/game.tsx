@@ -4,8 +4,9 @@ import axios from 'axios'
 import Menu from '../commonComponents/menu'
 import BackDrop from '../commonComponents/backDrop'
 import Buttons from './buttons'
+import { apiFireBase } from '../builderComponents/abstaraction/webAbstraction';
 
-const url = 'https://quize-e13b8-default-rtdb.europe-west1.firebasedatabase.app'
+// const url = 'https://quize-e13b8-default-rtdb.europe-west1.firebasedatabase.app'
 
 export default  function Game(props){
     
@@ -21,7 +22,10 @@ export default  function Game(props){
     const [louder, setLouder] = useState(true)
     
     const getQuestion = async id => {
-        return await axios.get(`${url}/notes/${id}.json`)
+        const firebase: apiFireBase = new apiFireBase()
+        return await  firebase.GetPost(id)
+        
+        //return await axios.get(`${url}/notes/${id}.json`)
     }
 
     useEffect(()=>{
