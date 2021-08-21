@@ -1,10 +1,8 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
-import Buttons from './nextButtons'
 import { useEffect } from 'react';
 import useStyles from '../cssModules/backTextFields';
-import FormBack from './FormBack'
 import debounce from 'lodash.debounce'
 import HOCForm from './HOCForm';
 import {HOCFormBack} from './HOC/HOCBack'
@@ -72,13 +70,15 @@ export  function BackTextFields(props) {
  const handlerQuestionField  = (event) => {
   SetCurrentQuestion(prev =>( {...prev, question:event.target.value } ) )
  }
- 
+ const debouncedQuestionField = useCallback(
+  handlerQuestionField
+, [])
 
 
  let rendoringTextFields = (
    <>
      <form className={classes.root} noValidate autoComplete="off"> 
-      <TextField id="outlined-basic2" label="Enter a answer" value ={currentQuestion.question} onChange ={handlerQuestionField} /> 
+      <TextField id="outlined-basic2" label="Enter a answer" value ={currentQuestion.question} onChange ={debouncedQuestionField} /> 
      </form>
      
       <Divider variant="middle" className = {classes.cen} />

@@ -14,7 +14,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Game from './component/gameComponents/game'
 import useStyles from './component/cssModules/app';
 import GeneratedLink from './component/gameComponents/generatedLink'
-import TestButton from './component/builderComponents/testBoundle';
 
 function App() {
   const palletType = useSelector( (state:RootState) => state.palet.isDark)
@@ -61,9 +60,7 @@ function App() {
         <GeneratedLink/>
       </Route>
 
-      <Route path="/testDebounce" exact>
-        <TestButton/>
-      </Route>
+ 
       
         
       

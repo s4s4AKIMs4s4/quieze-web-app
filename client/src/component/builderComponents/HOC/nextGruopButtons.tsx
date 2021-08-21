@@ -17,7 +17,6 @@ function Buttons(stateToReducer) {
   const text  = useSelector( (state:RootState) => state.answer.text)
   const index: number = useSelector( (state:RootState) => state.answer.index)
   const [louder, setLouder] = useState(false)
-  const length = text.length  
 
   const dispatch = useDispatch()
   const history = useHistory();

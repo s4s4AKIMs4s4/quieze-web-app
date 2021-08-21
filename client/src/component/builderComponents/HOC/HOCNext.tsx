@@ -1,5 +1,4 @@
  import HOCForm from "../HOCForm" 
- import FormNext from '../FormNext';
  import nextGruopButtons from './nextGruopButtons'
   
   const checkfornumber = (values, index) => {
