@@ -1,13 +1,13 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { useDispatch,useSelector } from 'react-redux';
-import {uploand, back, setLink, update} from '../../redux/actions'
-import { RootState } from '../../redux/rootReducer';
+import {uploand, back, setLink, update} from '../../../redux/actions'
+import { RootState } from '../../../redux/rootReducer';
 import { useHistory } from 'react-router-dom';
-import useStyles from '../cssModules/nextButtons';
+import useStyles from '../../cssModules/nextButtons';
 import axios from 'axios'
 import { useState } from 'react';
-import BackDrop from '../commonComponents/backDrop'
+import BackDrop from '../../commonComponents/backDrop'
 
 const url = 'https://quize-e13b8-default-rtdb.europe-west1.firebasedatabase.app'
 const domen = 'http://localhost:3000'
@@ -23,16 +23,9 @@ function Buttons(stateToReducer) {
   const history = useHistory();
 
   const handlerNextClick = () => {
-    //choose between to make step back or next 
-    if(Object.keys(stateToReducer).length > 1){
       dispatch(uploand(stateToReducer.currentTextState));
       //update page
       stateToReducer.updatePage()
-    }
-    else{
-      //the page will be refreshed automatically
-      dispatch(update(text, stateToReducer.currentTextState, index,length));
-    }
   }
 
   const handlerBack = () =>{
