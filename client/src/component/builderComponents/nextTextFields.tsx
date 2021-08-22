@@ -1,23 +1,31 @@
 import React, { useCallback } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
-import { useEffect,useMemo } from 'react';
+import { useEffect } from 'react';
 import useStyles from '../cssModules/nextTextFields';
-import debounce from 'lodash.debounce';
 import {HOCFormNext} from './HOC/HOCNext'
+import {giveCorrectList} from '../pureFunctionsForComponents'
 
 
-const giveCorrect = (check, length)=>{
-  let correct: number[] = [] 
-  for(let it  = 0 ; it<length; it++){
-    if(check[it])
-    correct.push(it)  
-  }
-  return correct
+interface propsNext {
+  text :number
+}
+
+export type checkMap ={ [index: number] :boolean }
+
+const initcorrectAnswers: checkMap = {
+  0:false,
+  1:false,
 }
 
 
-export default function NextTextFields(props) {
+export type initCurrentQuestionType = {
+  'question':string ,
+  'answers': string[],
+  'true': number[],
+}
+
+export default function NextTextFields(props : propsNext) {
   const classes = useStyles();
   
   const [it, setIt] = React.useState(props.text)
@@ -25,26 +33,20 @@ export default function NextTextFields(props) {
   
   
   //initialization correctAnswersState
-  const initcorrectAnswers: {
-    [index: number] :boolean
-  }  = {
-    0:false,
-    1:false,
-  }
 
   const [correctAnswers,setCorrectAnswers] = React.useState({
     ...initcorrectAnswers
   })
 
   //initialization current question
-  const initTrueAnswers:number[] = []  
-  const initAnswers: string[]  = []
-  const initQuestion: string = ""
-  
-  const initCurrentQuestion = {
-    "question": initQuestion,
-    "answers": initAnswers,
-    "true": initTrueAnswers,
+  // const initTrueAnswers:number[] = []  
+  // const initAnswers: string[]  = []
+  // const initQuestion: string = ""
+
+  const initCurrentQuestion :initCurrentQuestionType  = {
+    "question": "",
+    "answers": [],
+    "true": [],
   }
 
   const [currentQuestion, SetCurrentQuestion] = React.useState(
@@ -70,7 +72,7 @@ export default function NextTextFields(props) {
   }
 
 
-  let textHandler = (idx) =>( (event) => {
+  let textHandler = (idx: number) =>( (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(idx)
     console.log(event.target.value)
     const mas  = currentQuestion?.answers
@@ -83,7 +85,7 @@ export default function NextTextFields(props) {
   
   
   
-  const checkHandler = (idx) => ((event) => {
+  const checkHandler = (idx: number) => ((event) => {
     let check = {...correctAnswers}
 
     if(correctAnswers[idx] ){
@@ -95,14 +97,14 @@ export default function NextTextFields(props) {
       setCorrectAnswers( (prev) =>({...prev,[idx]: true}))
     }
     const length = Object.values(check).length
-    const correct = giveCorrect(check,length)
+    const correct = giveCorrectList(check,length)
     SetCurrentQuestion(prev =>( {...prev, true: correct } ) )
 
   })
   
   
   
-  const hadleLastField = (idx) => (event) =>{
+  const hadleLastField = (idx: number) => (event) =>{
     setCorrectAnswers({...correctAnswers,[idx+1]: false})
     setIt(prev =>{ console.log("prev",prev); return(prev+1)  })
   }
@@ -126,7 +128,6 @@ export default function NextTextFields(props) {
       <Divider variant="middle" className = {classes.cen} />
       
       <HOCFormNext answers = {currentQuestion?.answers} 
-        text = {props.text}
         it={it} 
         correctAnswers = {correctAnswers}
         checkHandler = {checkHandler} 

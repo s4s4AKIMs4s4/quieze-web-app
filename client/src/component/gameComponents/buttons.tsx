@@ -6,7 +6,8 @@ export default function Buttons (props){
     
     const buttons = (
         props.answer.answers.map((val, idx) => (
-             <Button  className = {classes.element} variant="contained"  color="primary" onClick = {props.handlerIdx(idx)} key = {idx+Math.random()}>
+             <Button  className = {classes.element} variant="contained"  color="primary"
+              onClick = {props.handlerIdx(idx)} key = {idx+Math.random()}>
                  {val}
              </Button>
          ))

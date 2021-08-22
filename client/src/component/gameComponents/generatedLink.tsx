@@ -9,7 +9,7 @@ import useStyles from '../cssModules/generatedLink'
 
 const url = 'https://quize-e13b8-default-rtdb.europe-west1.firebasedatabase.app'
 
-export default  function Game(props){
+export default  function Game(){
 
     const generatedLink  = useSelector( (state:RootState) => state.link?.link)
     const classes = useStyles();

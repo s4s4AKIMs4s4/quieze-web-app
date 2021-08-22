@@ -2,39 +2,29 @@ import {UPLOAD, BACK, UPDATE, NEXT} from './types'
 
 let init: string[] = []
 
-export type inside = 
+export type textQestion = 
 {
-    question: null,
+    question: string,
     answers: string[],
     true: number[],
 } 
 
+export type questionType = {
+    text:Array<textQestion>,
+    index: number,
+    buttonString: string
+}
 
-type Person = {
-    email: string;
-    rating: number;
-  };
-  let scores: { [name: string]: Person } = {};
-  scores.bill = {
-    email: "bill@somewhere.com",
-    rating: 9,
-  };
-
-
-let initialState: {text:Array<inside>,index: number,buttonString: string} = {
-                                            text:[ 
-                                            {
-                                                question: null,
-                                                answers: init,
-                                                true: [0],                      
-                                            }],
-                                            index:0,
-                                            buttonString: "INIT",
-                                        };
-
-//{ ...state.text, answers:[...state.text, action.payloud] }
-// we alredy get a full complect answers so put it to next  dictionary
-
+let initialState:questionType = {
+                                    text:[ 
+                                    {
+                                        question: 'null',
+                                        answers: init,
+                                        true: [0],                      
+                                    }],
+                                    index:0,
+                                    buttonString: "INIT",
+                                };
 
 export const textReducer = (state = initialState,action) => {
     switch(action.type){

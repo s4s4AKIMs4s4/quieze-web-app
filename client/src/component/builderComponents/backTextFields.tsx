@@ -3,20 +3,20 @@ import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
 import { useEffect } from 'react';
 import useStyles from '../cssModules/backTextFields';
-import debounce from 'lodash.debounce'
-import HOCForm from './HOCForm';
 import {HOCFormBack} from './HOC/HOCBack'
+import {textQestion} from '../../redux/textReducer'
+import {correctAnswersMap} from './builderQuize'
+import {giveCorrectList} from '../pureFunctionsForComponents'
 
-const giveCorrect = (check, length)=>{
-  let correct: number[] = [] 
-  for(let it  = 0 ; it<length; it++){
-    if(check[it])
-    correct.push(it)  
-  }
-  return correct
+
+
+interface propsBack{
+  text:string[],
+  obj: textQestion,
+  correct: correctAnswersMap,
 }
 
-export default  function BackTextFields(props) {
+export default  function BackTextFields(props: propsBack) {
   const classes = useStyles();
   const [it, setIt] = React.useState(props.text.length)
   const [correctAnswers,setСorrectAnswers] = React.useState(props.correct)
@@ -29,12 +29,11 @@ export default  function BackTextFields(props) {
     setIt(props.text.length)
     setСorrectAnswers(props.correct)
     SetCurrentQuestion(props.obj)
-    
   }, [props.obj])
 
 
 
-  let textHandler = (idx) =>( (event) => {
+  let textHandler = (idx: number) =>( (event: React.ChangeEvent<HTMLInputElement> ) => {
       const mas  = currentQuestion?.answers
       mas[idx] = event.target.value
       console.log('value')
@@ -44,7 +43,7 @@ export default  function BackTextFields(props) {
   )
 
 
-  const checkHandler = (idx) => ((event) => {
+  const checkHandler = (idx: number) => ((event) => {
     let check = {...correctAnswers}
 
     if(correctAnswers[idx] ){
@@ -56,13 +55,13 @@ export default  function BackTextFields(props) {
       setСorrectAnswers( (prev) =>({...prev,[idx]: true}))
     }
     const length = Object.values(check).length
-    const correct = giveCorrect(check,length)
+    const correct = giveCorrectList(check,length)
     SetCurrentQuestion(prev =>( {...prev, true: correct } ) )
     
   })
 
 
-  const hadleLastField = (idx) => (event) =>{
+  const hadleLastField = (idx: number) => (event) =>{
     setСorrectAnswers({...correctAnswers,[idx+1]: false})
     setIt(it+1)
   }

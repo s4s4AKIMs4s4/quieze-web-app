@@ -1,6 +1,5 @@
 
-import { useState, useEffect } from 'react';
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
 import Menu from '../commonComponents/menu'
 import BackDrop from '../commonComponents/backDrop'
 import Buttons from './buttons'
@@ -8,7 +7,12 @@ import { apiFireBase } from '../builderComponents/abstaraction/webAbstraction';
 
 // const url = 'https://quize-e13b8-default-rtdb.europe-west1.firebasedatabase.app'
 
-export default  function Game(props){
+
+
+
+
+
+export default  function Game(props: any){
     
     const initText = {
         question: "nul",
@@ -46,10 +50,10 @@ export default  function Game(props){
                 setIdx(idx)
             else
                 setIdx(idx+1)
-        }, 2000 )
+        }, 1000 )
     }
 
-    const handlerAnswers = (index) => (event) => {
+    const handlerAnswers = (index) => (event: React.MouseEvent<HTMLButtonElement> ) => {
         const trueList = answer.true.filter(val => 
             (val === index)
         );
