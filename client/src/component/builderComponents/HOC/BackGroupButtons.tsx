@@ -10,76 +10,40 @@ import { useState } from 'react';
 import BackDrop from '../../commonComponents/backDrop'
 import {apiFireBase} from '../abstaraction/webAbstraction'
 
-// const url = 'https://quize-e13b8-default-rtdb.europe-west1.firebasedatabase.app'
-// const domen = 'http://localhost:3000'
-
-function Buttons(stateToReducer) {
+function Buttons(props) {
   const classes = useStyles();   
-  const text  = useSelector( (state:RootState) => state.answer.text)
-  const index: number = useSelector( (state:RootState) => state.answer.index)
-  const [louder, setLouder] = useState(false)
-  const length = text.length  
+  //const text  = useSelector( (state:RootState) => state.answer.text)
+  //const index: number = useSelector( (state:RootState) => state.answer.index)
+  //const [louder, setLouder] = useState(false)
+  const length = props.text.length  
 
   const dispatch = useDispatch()
   const history = useHistory();
 
   const handlerNextClick = () => {
-    dispatch(update(text, stateToReducer.currentTextState, index,length));
+    dispatch(update(props.text, props.currentTextState, props.index,length));
   }
 
-
-
-
-
   const handlerBack = () =>{
-    if(index !== 0){
-      dispatch(back())
+    if(props.index !== 0){
+      dispatch(back(props.text, props.currentTextState, props.index))
     }
   }
 
-  const MemoHandlerBack = useCallback((
-    handlerBack
-  ), [index])
-
-
-  const MemoNextClick = useCallback((
-    
-    handlerNextClick
-  ), [index])
-
-  const handleSaveClick = async () => { 
-    setLouder( prev => !prev)
-
-    const firebase: apiFireBase = new apiFireBase()
-    
-    //const res = await axios.post(`${url}/notes.json`, text)
-    setLouder( prev => !prev)
-    const res = await firebase?.sendPost('notes.json', text)
-    setLouder( prev => !prev)
-
-    const link  = `${firebase?.domen}/gameNotes/${res?.data.name}`
-    dispatch(setLink(link))
-    console.log(link)
-
-    history.push('/game');
-
-  }
 
   return(
     <div>
-    {
-      (!louder)
-        ?  <form className={classes.test} noValidate autoComplete="off">
+    
+    <form className={classes.test} noValidate autoComplete="off">
               <div className={classes.middle}>
-                  <Button  onClick = {MemoHandlerBack}> Back</Button>
+                  <Button  onClick = {handlerBack}> Back</Button>
                   <Button  onClick = {handlerNextClick}>Next</Button>  
-                  <Button  onClick={handleSaveClick}>  
+                  <Button  onClick={props.handleSaveClick}>  
                     Save
                   </Button>        
               </div>
             </form>
-        : <BackDrop louder = {louder}/>
-    }
+
   </div>  
       
   );

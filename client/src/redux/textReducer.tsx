@@ -1,4 +1,4 @@
-import {UPLOAD, BACK, UPDATE, NEXT} from './types'
+import {UPLOAD, BACK, UPDATE, NEXT, BACK_WITHOUT_UPDATE} from './types'
 
 let init: string[] = []
 
@@ -31,6 +31,8 @@ export const textReducer = (state = initialState,action) => {
         case UPLOAD:
             return {...state, text:[...state.text, action.payloud],index: state.index+1,buttonString:"NEXT"  }
         case BACK:
+            return {...state,text:action.payloud, index: state.index -1,buttonString:"BACK" }
+        case BACK_WITHOUT_UPDATE:
             return {...state, index: state.index -1,buttonString:"BACK" }
         case UPDATE:
             return {...state, text:action.payloud, index: state.index + 1,buttonString:"UPDATE" }

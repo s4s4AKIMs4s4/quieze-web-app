@@ -5,15 +5,14 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import useStyles from '../cssModules/backTextFields';
 import {checkMap, initCurrentQuestionType} from '../builderComponents/nextTextFields'
+import { useDispatch,useSelector } from 'react-redux';
+import {uploand, back, setLink, update} from '../../redux/actions'
+import { RootState } from '../../redux/rootReducer';
+import { useState } from 'react';
+import BackDrop from '../commonComponents/backDrop'
+import {apiFireBase} from './abstaraction/webAbstraction'
+import { useHistory } from 'react-router-dom';
 
-// text = {props.text}
-// it={it} 
-// correctAnswers = {correctAnswers}
-// checkHandler = {checkHandler} 
-// textHandler = {textHandler}
-// hadleLastField = {hadleLastField}
-// currentTextState =  { {...currentQuestion} }
-// updatePage = {hadlerUpdate}  
 
 interface IHOCForm{
   textHandler: Function,
@@ -30,8 +29,14 @@ interface IHOCForm{
 
 export default function HOCForm(Buttons ,getList:Function){
     return function HH(props: IHOCForm){
-        
-        const classes = useStyles();
+      const text  = useSelector( (state:RootState) => state.answer.text)
+      const index: number = useSelector( (state:RootState) => state.answer.index)
+      const [louder, setLouder] = useState(false)
+      const length = text.length  
+      const dispatch = useDispatch()
+      const history = useHistory();
+
+      const classes = useStyles();
 
         let textFieldJsx = (val, idx) => {
             return (
@@ -55,21 +60,48 @@ export default function HOCForm(Buttons ,getList:Function){
             {textFieldJsx(val,idx)}   
           </Grid>)
         )
+
+
+        const handleSaveClick = async () => { 
+          const firebase: apiFireBase = new apiFireBase()    
+         
+          setLouder( prev => !prev)
+          const res = await firebase?.sendPost('notes.json', text)
+          setLouder( prev => !prev)
+         
+          const link  = `${firebase?.domen}/gameNotes/${res?.data.name}`
+          dispatch(setLink(link))
+          console.log(link)
       
+          history.push('/game');
+      
+        }
     
         return (
-            <>
-    
-            <form  className={classes.cen} noValidate autoComplete="off">
-              <div className={classes.textRoot}>
-                <Grid container spacing={5}>
-                  {listTextFields}
-                </Grid>
-              </div>
+            <div>
+            {
+          (!louder)
+          ? <div> 
+              <form  className={classes.cen} noValidate autoComplete="off">
+                <div className={classes.textRoot}>
+                  <Grid container spacing={5}>
+                    {listTextFields}
+                  </Grid>
+                </div>
+                
+              </form>
+              <Buttons currentTextState = {  props.currentTextState}
+               updatePage = {props.updatePage}
+               handleSaveClick = {handleSaveClick}
+               text = {text}
+               index = {index}
+               
               
-            </form>
-            <Buttons currentTextState = {  props.currentTextState} updatePage = {props.updatePage} />
-          </>
+              />
+            </div>
+          : <BackDrop louder = {louder}  />
+          }
+          </div>
         )
     }
 }
