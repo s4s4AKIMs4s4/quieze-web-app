@@ -49,7 +49,7 @@ function Buttons(props: IButtons) {
     <div>
             <form className={classes.test} noValidate autoComplete="off">
               <div className={classes.middle}>
-                  <Button  onClick = {MemoHandlerBack}> Back</Button>
+                  <Button  onClick = {handlerBack}> Back</Button>
                   <Button  onClick = {handlerNextClick}>Next</Button>  
                   <Button  onClick={props.handleSaveClick}>  
                     Save

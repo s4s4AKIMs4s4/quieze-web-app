@@ -6,7 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import useStyles from '../cssModules/backTextFields';
 import {checkMap, initCurrentQuestionType} from '../builderComponents/nextTextFields'
 import { useDispatch,useSelector } from 'react-redux';
-import {uploand, back, setLink, update} from '../../redux/actions'
+import {uploand, back, setLink, update, save} from '../../redux/actions'
 import { RootState } from '../../redux/rootReducer';
 import { useState } from 'react';
 import BackDrop from '../commonComponents/backDrop'
@@ -64,15 +64,17 @@ export default function HOCForm(Buttons ,getList:Function){
 
         const handleSaveClick = async () => { 
           const firebase: apiFireBase = new apiFireBase()    
-         
-          setLouder( prev => !prev)
+          
+          //setLouder( prev => !prev)
+          
+          await dispatch(save(text,props.currentTextState,index,length));
           const res = await firebase?.sendPost('notes.json', text)
-          setLouder( prev => !prev)
-         
+          //setLouder( prev => !prev)
+          
           const link  = `${firebase?.domen}/gameNotes/${res?.data.name}`
           dispatch(setLink(link))
           console.log(link)
-      
+          
           history.push('/game');
       
         }

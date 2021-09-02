@@ -7,6 +7,8 @@ import { RootState } from '../../redux/rootReducer';
 import BackTextFields from './backTextFields'
 import {textQestion} from '../../redux/textReducer'
 import {getCorrectAnswersMap} from '../pureFunctionsForComponents'
+import BackDrop from '../commonComponents/backDrop'
+
 export type correctAnswersMap = {[index: number]: boolean}
 
 export default function Quize(){
@@ -26,7 +28,8 @@ export default function Quize(){
                 obj = {allQuestions[currentQuestion]} 
                 correct = {correctAnswers}/>)
         }
-
+        else if(pressedButton === "SAVE")
+            return <BackDrop louder = {true}  />
         return(<NextTextFields text = {1}/>)        
        
     }

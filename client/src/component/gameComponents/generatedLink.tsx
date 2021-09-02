@@ -7,7 +7,6 @@ import {useSelector } from 'react-redux';
 import { RootState } from '../../redux/rootReducer';
 import useStyles from '../cssModules/generatedLink'
 
-const url = 'https://quize-e13b8-default-rtdb.europe-west1.firebasedatabase.app'
 
 export default  function Game(){
 
@@ -21,8 +20,7 @@ export default  function Game(){
             <div className = {classes.wrapper}>
             <Paper className ={classes.paper} >
                 <div className = {classes.textAllign}> 
-                    Link generated!
-                    <div></div>
+                    <div>Link generated!</div>
                     <Link href = {generatedLink} > {generatedLink} </Link>
                 </div> 
             </Paper>

@@ -22,8 +22,9 @@ const useStyles = makeStyles((theme: Theme) =>
         height:'100vh'
    },
    textAllign:{
+    overflowWrap:'break-word',
     position:'relative',
-    top:'30%',
+    top:'20%',
 
    }
 }),
