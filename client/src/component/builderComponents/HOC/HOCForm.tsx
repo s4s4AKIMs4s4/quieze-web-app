@@ -1,16 +1,15 @@
-import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { Grid } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import useStyles from '../cssModules/backTextFields';
-import {checkMap, initCurrentQuestionType} from '../builderComponents/nextTextFields'
+import useStyles from '../../cssModules/backTextFields';
+import {checkMap, initCurrentQuestionType} from '../nextTextFields'
 import { useDispatch,useSelector } from 'react-redux';
-import {uploand, back, setLink, update, save} from '../../redux/actions'
-import { RootState } from '../../redux/rootReducer';
+import { setLink,  save} from '../../../redux/actions'
+import { RootState } from '../../../redux/rootReducer';
 import { useState } from 'react';
-import BackDrop from '../commonComponents/backDrop'
-import {apiFireBase} from './abstaraction/webAbstraction'
+import BackDrop from '../../commonComponents/backDrop'
+import {apiFireBase} from '../abstaraction/webAbstraction'
 import { useHistory } from 'react-router-dom';
 
 

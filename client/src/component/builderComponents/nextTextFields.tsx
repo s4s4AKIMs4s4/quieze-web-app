@@ -32,16 +32,13 @@ export default function NextTextFields(props : propsNext) {
   const [reUdate,setReUpdate] = React.useState(false)
   
   
-  //initialization correctAnswersState
+
 
   const [correctAnswers,setCorrectAnswers] = React.useState({
     ...initcorrectAnswers
   })
 
-  //initialization current question
-  // const initTrueAnswers:number[] = []  
-  // const initAnswers: string[]  = []
-  // const initQuestion: string = ""
+  
 
   const initCurrentQuestion :initCurrentQuestionType  = {
     "question": "",
@@ -138,9 +135,7 @@ export default function NextTextFields(props : propsNext) {
 
       />
       
-      {/* <Buttons currentTextState = {  {...currentQuestion}} updatePage = {hadlerUpdate} /> */}
     </>
   )
 }
 
-//export default React.memo(NextTextFields)

@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import useStyles from '../cssModules/backTextFields';
 import {HOCFormBack} from './HOC/HOCBack'
 import {textQestion} from '../../redux/textReducer'
-import {correctAnswersMap} from './builderQuize'
+import {correctAnswersMap} from './Mediator'
 import {giveCorrectList} from '../pureFunctionsForComponents'
 
 
@@ -101,4 +101,3 @@ export default  function BackTextFields(props: propsBack) {
 
   }
 
-//  export default React.memo(BackTextFields)

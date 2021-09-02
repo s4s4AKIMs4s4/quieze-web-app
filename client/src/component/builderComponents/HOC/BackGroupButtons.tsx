@@ -1,14 +1,11 @@
-import React, {useCallback} from 'react';
+import React  from 'react';
 import Button from '@material-ui/core/Button';
-import { useDispatch,useSelector } from 'react-redux';
-import {uploand, back, setLink, update} from '../../../redux/actions'
-import { RootState } from '../../../redux/rootReducer';
+import { useDispatch } from 'react-redux';
+import { back, update} from '../../../redux/actions'
+
 import { useHistory } from 'react-router-dom';
 import useStyles from '../../cssModules/nextButtons';
-import axios from 'axios'
-import { useState } from 'react';
-import BackDrop from '../../commonComponents/backDrop'
-import {apiFireBase} from '../abstaraction/webAbstraction'
+
 
 function Buttons(props) {
   const classes = useStyles();   

@@ -6,7 +6,7 @@ import { lightBlue } from '@material-ui/core/colors';
 import { deepOrange } from '@material-ui/core/colors';
 import { deepPurple } from '@material-ui/core/colors';
 import {useSelector} from 'react-redux'
-import Quize from './component/builderComponents/builderQuize'
+import Quize from './component/builderComponents/Mediator'
 import { createTheme, ThemeProvider} from "@material-ui/core/styles";
 import {RootState} from './redux/rootReducer'
 import CssBaseline from '@material-ui/core/CssBaseline';

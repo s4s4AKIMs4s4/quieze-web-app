@@ -1,4 +1,3 @@
-import React from 'react';
 import Menu from '../commonComponents/menu'
 import NextTextFields from './nextTextFields'
 import Papers from './paper'

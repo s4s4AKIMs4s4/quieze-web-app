@@ -1,16 +1,10 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback} from 'react';
 import Button from '@material-ui/core/Button';
-import { useDispatch,useSelector } from 'react-redux';
-import {uploand, back, setLink, update} from '../../../redux/actions'
-import { RootState } from '../../../redux/rootReducer';
-import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {uploand, back} from '../../../redux/actions'
 import useStyles from '../../cssModules/nextButtons';
-import axios from 'axios'
-import { useState } from 'react';
-import BackDrop from '../../commonComponents/backDrop'
-import {apiFireBase} from '../abstaraction/webAbstraction'
 import {questionType} from '../../../redux/textReducer'
-import {checkMap, initCurrentQuestionType} from '../nextTextFields'
+import {initCurrentQuestionType} from '../nextTextFields'
 
 
 interface IButtons{

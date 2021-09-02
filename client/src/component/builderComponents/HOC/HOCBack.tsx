@@ -1,4 +1,4 @@
-import HOCForm from '../HOCForm';
+import HOCForm from './HOCForm';
 import BackGroupButtons from './BackGroupButtons'
 
 
