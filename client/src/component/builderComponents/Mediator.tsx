@@ -4,7 +4,7 @@ import Papers from './paper'
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/rootReducer';
 import BackTextFields from './backTextFields'
-import {textQestion} from '../../redux/textReducer'
+import {textQestion} from '../../redux/types'
 import {getCorrectAnswersMap} from '../pureFunctionsForComponents'
 import BackDrop from '../commonComponents/backDrop'
 
@@ -14,10 +14,7 @@ export default function Quize(){
     let allQuestions: Array<textQestion> = useSelector( (state:RootState) => state.answer.text)
     let currentQuestion: number = useSelector( (state:RootState) => state.answer.index) + 1
     let pressedButton: string = useSelector( (state:RootState) => state.answer.buttonString)
-    allQuestions = JSON.parse(JSON.stringify(allQuestions))
     
-
-
 
     function pickPageForRendor() {
         if (pressedButton === "BACK" || pressedButton === "UPDATE" ){ 

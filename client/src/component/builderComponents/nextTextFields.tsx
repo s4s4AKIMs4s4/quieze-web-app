@@ -70,8 +70,6 @@ export default function NextTextFields(props : propsNext) {
 
 
   let textHandler = (idx: number) =>( (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(idx)
-    console.log(event.target.value)
     const mas  = currentQuestion?.answers
     mas[idx] = event.target.value
     SetCurrentQuestion(prev =>( {...prev, answers: mas } ) )

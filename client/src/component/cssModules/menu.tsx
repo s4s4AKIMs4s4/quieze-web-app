@@ -12,8 +12,14 @@ const useStyles = makeStyles((theme: Theme) =>
     menuButton: {
       marginRight: theme.spacing(2),
     },
+    switch:{
+      [theme.breakpoints.up('sm')]: {
+        position:'absolute',
+        right:'5px',
+      },
+    },
     title: {
-      display: 'none',
+      cursor: 'pointer',
       [theme.breakpoints.up('sm')]: {
         display: 'block',
       },

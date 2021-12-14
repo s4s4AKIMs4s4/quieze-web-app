@@ -1,33 +1,10 @@
-import {UPLOAD, BACK, UPDATE, NEXT, BACK_WITHOUT_UPDATE,SAVE } from './types'
+import {UPLOAD, BACK, UPDATE, NEXT, BACK_WITHOUT_UPDATE, SAVE, INIT, initialState } from './types'
 
-let init: string[] = []
-
-export type textQestion = 
-{
-    question: string,
-    answers: string[],
-    true: number[],
-} 
-
-export type questionType = {
-    text:Array<textQestion>,
-    index: number,
-    buttonString: string
-}
-
-let initialState:questionType = {
-                                    text:[ 
-                                    {
-                                        question: 'null',
-                                        answers: init,
-                                        true: [0],                      
-                                    }],
-                                    index:0,
-                                    buttonString: "INIT",
-                                };
 
 export const textReducer = (state = initialState,action) => {
     switch(action.type){
+        case INIT:
+            return {...state, ...action.payloud }
         case UPLOAD:
             return {...state, text:[...state.text, action.payloud],index: state.index+1,buttonString:"NEXT"  }
         case BACK:

@@ -4,7 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import { useEffect } from 'react';
 import useStyles from '../cssModules/backTextFields';
 import {HOCFormBack} from './HOC/HOCBack'
-import {textQestion} from '../../redux/textReducer'
+import {textQestion} from '../../redux/types'
 import {correctAnswersMap} from './Mediator'
 import {giveCorrectList} from '../pureFunctionsForComponents'
 

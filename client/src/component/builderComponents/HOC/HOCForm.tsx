@@ -62,14 +62,10 @@ export default function HOCForm(Buttons ,getList:Function){
 
 
         const handleSaveClick = async () => { 
+          
           const firebase: apiFireBase = new apiFireBase()    
-          
-          //setLouder( prev => !prev)
-          
           await dispatch(save(text,props.currentTextState,index,length));
-          const res = await firebase?.sendPost('notes.json', text)
-          //setLouder( prev => !prev)
-          
+          const res = await firebase?.sendPost('notes.json', text) 
           const link  = `${firebase?.domen}/gameNotes/${res?.data.name}`
           dispatch(setLink(link))
           console.log(link)

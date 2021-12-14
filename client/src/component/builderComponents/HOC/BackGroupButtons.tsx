@@ -9,9 +9,6 @@ import useStyles from '../../cssModules/nextButtons';
 
 function Buttons(props) {
   const classes = useStyles();   
-  //const text  = useSelector( (state:RootState) => state.answer.text)
-  //const index: number = useSelector( (state:RootState) => state.answer.index)
-  //const [louder, setLouder] = useState(false)
   const length = props.text.length  
 
   const dispatch = useDispatch()

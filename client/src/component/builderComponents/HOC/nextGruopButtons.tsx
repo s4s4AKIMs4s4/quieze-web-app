@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
 import {uploand, back} from '../../../redux/actions'
 import useStyles from '../../cssModules/nextButtons';
-import {questionType} from '../../../redux/textReducer'
+import {questionType} from '../../../redux/types'
 import {initCurrentQuestionType} from '../nextTextFields'
 
 
