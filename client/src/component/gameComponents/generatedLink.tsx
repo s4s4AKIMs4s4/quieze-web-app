@@ -1,5 +1,4 @@
 
-import { useTheme } from '@material-ui/core/styles';
 import Menu from '../commonComponents/menu'
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
@@ -9,10 +8,8 @@ import useStyles from '../cssModules/generatedLink'
 
 
 export default  function Game(){
-
     const generatedLink  = useSelector( (state:RootState) => state.link?.link)
     const classes = useStyles();
-    const theme = useTheme();
 
     return (
         <>
@@ -28,3 +25,5 @@ export default  function Game(){
         </>
     )
 }
+
+

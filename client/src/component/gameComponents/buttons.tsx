@@ -1,11 +1,13 @@
 import useStyles from '../cssModules/game'
 import Button from '@material-ui/core/Button';
+import {EndGame} from './endGame'
+
 
 export default function Buttons (props){
     const classes = useStyles();
 
 
-    const funcButtons = () => {
+    const produceButtons = () => {
         return (
             props.answer.answers.map((val, idx) => (
                 <Button  className = {classes.element} variant="contained"  color="primary"
@@ -18,13 +20,15 @@ export default function Buttons (props){
 
     return (
         <div>
-            <div className = {classes.textNode} color = "primary"> 
-                {props.answer.question}
-            </div>
+            {props.answer.answers &&
+                <div className = {classes.textNode} color = "primary"> 
+                    {props.answer.question}
+                </div>
+            }
             <div className = {classes.wrapper}>
                 {( props.answer.answers) 
-                    ? funcButtons()
-                    : 'End'
+                    ? produceButtons()
+                    : <EndGame/>
                 }
             </div>
         </div>

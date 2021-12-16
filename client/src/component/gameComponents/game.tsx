@@ -5,13 +5,6 @@ import BackDrop from '../commonComponents/backDrop'
 import Buttons from './buttons'
 import { apiFireBase } from '../builderComponents/abstaraction/webAbstraction';
 
-// const url = 'https://quize-e13b8-default-rtdb.europe-west1.firebasedatabase.app'
-
-
-
-
-
-
 export default  function Game(props: any){
     
     const initText = {
@@ -24,18 +17,20 @@ export default  function Game(props: any){
     const [idx,setIdx] = useState(0)
     const [answer,setAnswer] = useState(initText)
     const [louder, setLouder] = useState(true)
+    const [isEnd, setEnd] = useState<boolean>(false)
     
     const getQuestion = async id => {
         const firebase: apiFireBase = new apiFireBase()
         return await  firebase.GetPost(id)
         
-        //return await axios.get(`${url}/notes/${id}.json`)
     }
 
     useEffect(()=>{
+        console.log('hello')
         getQuestion(props.match.params.id).then(res =>{
-                setText(prev =>  JSON.parse(JSON.stringify(res.data)) ); 
+                setText(prev =>  JSON.parse(JSON.stringify(res.data))  ); 
                 setIdx(prev => prev+1); 
+                console.log(res.data)
                 setLouder(false) 
             })
     },[]);
@@ -46,8 +41,10 @@ export default  function Game(props: any){
     
     const resetStyles = () => {
         setTimeout(() =>  {
-            if(idx === text.length -1)
+            if(idx === text.length -1){
                 setIdx(idx)
+                setEnd(true)
+            }
             else
                 setIdx(idx+1)
         }, 1000 )
@@ -62,16 +59,25 @@ export default  function Game(props: any){
             event.currentTarget.style.backgroundColor = 'red'
         resetStyles()
     }
+    const rendorGame = () => {    
+        if(!isEnd){
+                if(!louder){    
+                    return <Buttons answer = {answer} handlerIdx = {handlerAnswers} /> 
+                }
+                else{
+                    return <BackDrop louder = {louder}/>
+                }
+        }   
+        else{
+            return <Buttons answer = {answer.answers} handlerIdx = {handlerAnswers} /> 
+        }
+    }
 
     return (
         <>
         <Menu/>
         <div>
-            {
-                !louder      
-                    ? <Buttons answer = {answer} handlerIdx = {handlerAnswers} /> 
-                    : <BackDrop louder = {louder}/>
-            }
+            {rendorGame()}
         </div>
     </>
     )

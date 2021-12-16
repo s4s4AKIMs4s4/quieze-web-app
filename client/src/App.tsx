@@ -50,7 +50,7 @@ function App() {
   <Router>
     <Switch>
     <Route path="/gameNotes/:id" exact component={Game}/>
-      <Route path="/" exact>
+      <Route path="/" exact> 
         
           <CssBaseline />
           <Quize/>
@@ -70,7 +70,7 @@ function App() {
   );
 
 
-
+                                                  
 
 }
 

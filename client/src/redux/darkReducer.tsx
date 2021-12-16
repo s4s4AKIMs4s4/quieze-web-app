@@ -1,7 +1,7 @@
 import {DARK_STATE,LIGTH_STATE} from './types'
 
 const intialState = {
-    isDark: true
+    isDark: false
 }
 
 export const darkReducer = (state = intialState,action) => {
