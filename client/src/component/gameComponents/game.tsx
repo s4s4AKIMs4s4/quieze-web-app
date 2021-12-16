@@ -26,11 +26,9 @@ export default  function Game(props: any){
     }
 
     useEffect(()=>{
-        console.log('hello')
         getQuestion(props.match.params.id).then(res =>{
                 setText(prev =>  JSON.parse(JSON.stringify(res.data))  ); 
                 setIdx(prev => prev+1); 
-                console.log(res.data)
                 setLouder(false) 
             })
     },[]);
