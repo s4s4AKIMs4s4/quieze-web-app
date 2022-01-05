@@ -15,7 +15,8 @@ function Buttons(props) {
   const history = useHistory();
 
   const handlerNextClick = () => {
-    dispatch(update(props.text, props.currentTextState, props.index,length));
+    if(props.text)
+      dispatch(update(props.text, props.currentTextState, props.index,length));
   }
 
   const handlerBack = () =>{

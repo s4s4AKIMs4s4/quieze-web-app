@@ -24,8 +24,10 @@ function Buttons(props: IButtons) {
 
   const handlerNextClick = () => {
     console.log('index')
+    if(props.currentTextState.question){
       dispatch(uploand(props.currentTextState));
       props.updatePage()
+    }
   }
 
   const handlerBack = () =>{
